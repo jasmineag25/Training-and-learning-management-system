@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ContentView: View {
     var body: some View {
@@ -16,6 +17,16 @@ struct ContentView: View {
             Text("Hello, Madhav Verma!")
         }
         .padding()
+    }
+}
+
+func signIn(email: String, password: String) {
+    Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+        if let error = error {
+            print("Error: \(error.localizedDescription)")
+        } else {
+            print("User signed in successfully")
+        }
     }
 }
 
