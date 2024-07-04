@@ -15,15 +15,10 @@ struct LoginView: View {
                     .frame(height: 200)
                     .padding(.top, 50)
                 
-                HStack{
-                    Text("Log in")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.top, 20)
-                        .padding(.leading, -170)
-                    
-                    
-                }
+                Text("Log in")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.top, 20)
                 
                 // Email field
                 TextField("Email address", text: $email)
@@ -79,9 +74,11 @@ struct LoginView: View {
                 // Login button
                 Button(action: {
                     // Action for login
-                  
+                    
+                    
                     
                 }) {
+                   
                     Text("Log in")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -90,21 +87,23 @@ struct LoginView: View {
                         .background(Color.blue)
                         .cornerRadius(10.0)
                         .padding(.top, 20)
+//
                 }
+          
                 
                 // Or Login with
-                Text("Or Sign up with")
+                Text("Or Login with")
                     .padding(.top, 30)
                 
                 HStack(spacing: 20) {
-//                    Button(action: {
-//                        // Action for Facebook login
-//                    }) {
-//                        Image(systemName: "f.square.fill")
-//                            .resizable()
-//                            .frame(width: 30, height: 30)
-//                            .foregroundColor(.blue)
-//                    }
+                    Button(action: {
+                        // Action for Facebook login
+                    }) {
+                        Image(systemName: "f.square.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.blue)
+                    }
                     Button(action: {
                         // Action for Google login
                     }) {
@@ -127,8 +126,7 @@ struct LoginView: View {
                 // Sign up link
                 HStack {
                     Text("Don’t have an account?")
-                    NavigationLink(destination:
-                                    PersonalDetailsForm()) {
+                    NavigationLink(destination: PersonalDetailsForm()) {
                         Text("Sign up")
                             .foregroundColor(.blue)
                     }
@@ -142,21 +140,8 @@ struct LoginView: View {
     }
 }
 
-struct SignUpView: View {
-    var body: some View {
-        Text("Sign Up View")
-    }
-}
-
-struct ContentView: View {
-    var body: some View {
-        LoginView()
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
+struct ContentsView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
 }
-
