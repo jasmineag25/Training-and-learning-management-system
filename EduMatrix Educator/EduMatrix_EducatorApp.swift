@@ -22,7 +22,7 @@ struct EduMatrix_EducatorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
         }
     }
 }
