@@ -172,3 +172,8 @@ struct ImagePickerView: UIViewControllerRepresentable {
         }
     }
 }
+struct PersonalDetailsForm_Previews: PreviewProvider {
+    static var previews: some View {
+       PersonalDetailsForm()
+    }
+}
