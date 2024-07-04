@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A928210C2C37205600D137B6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A98806D32C367945005D2F17 /* FirebaseAnalytics */; };
+		A928210D2C37205600D137B6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A98806D52C367945005D2F17 /* FirebaseAuth */; };
+		A928210E2C37205600D137B6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A98806D72C367945005D2F17 /* FirebaseFirestore */; };
+		A928210F2C37205600D137B6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A98806D92C367945005D2F17 /* FirebaseStorage */; };
+		A92821112C3720B600D137B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A92821102C3720B600D137B6 /* GoogleService-Info.plist */; };
 		A988069E2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */; };
 		A98806A02C3568CF005D2F17 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988069F2C3568CF005D2F17 /* LoginView.swift */; };
 		A98806A22C3568D0005D2F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98806A12C3568D0005D2F17 /* Assets.xcassets */; };
@@ -16,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A92821102C3720B600D137B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A988069A2C3568CF005D2F17 /* EduMatrix Educator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EduMatrix Educator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduMatrix_EducatorApp.swift; sourceTree = "<group>"; };
 		A988069F2C3568CF005D2F17 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -30,10 +36,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A98806D42C367945005D2F17 /* FirebaseAnalytics in Frameworks */,
-				A98806DA2C367945005D2F17 /* FirebaseStorage in Frameworks */,
-				A98806D62C367945005D2F17 /* FirebaseAuth in Frameworks */,
-				A98806D82C367945005D2F17 /* FirebaseFirestore in Frameworks */,
+				A928210F2C37205600D137B6 /* FirebaseStorage in Frameworks */,
+				A928210E2C37205600D137B6 /* FirebaseFirestore in Frameworks */,
+				A928210D2C37205600D137B6 /* FirebaseAuth in Frameworks */,
+				A928210C2C37205600D137B6 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +65,7 @@
 		A988069C2C3568CF005D2F17 /* EduMatrix Educator */ = {
 			isa = PBXGroup;
 			children = (
-				A98806D02C367861005D2F17 /* GoogleService-Info.plist */,
+				A92821102C3720B600D137B6 /* GoogleService-Info.plist */,
 				A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */,
 				A988069F2C3568CF005D2F17 /* LoginView.swift */,
 				E5D01D0E2C36BB1600C348AD /* Course.swift */,
@@ -147,7 +153,7 @@
 			files = (
 				A98806A52C3568D0005D2F17 /* Preview Assets.xcassets in Resources */,
 				A98806A22C3568D0005D2F17 /* Assets.xcassets in Resources */,
-				A98806D12C367861005D2F17 /* GoogleService-Info.plist in Resources */,
+				A92821112C3720B600D137B6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

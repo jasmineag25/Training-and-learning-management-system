@@ -1,3 +1,10 @@
+//
+//  Login.swift
+//  EduMatrix Educator
+//
+//  Created by Madhav Verma on 04/07/24.
+//
+
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -17,10 +24,15 @@ struct LoginView: View {
                     .frame(height: 200)
                     .padding(.top, 50)
                 
-                Text("Log in")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(.top, 20)
+                HStack{
+                    Text("Log in")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.top, 20)
+                        .padding(.leading, -170)
+                    
+                    
+                }
                 
                 // Email field
                 TextField("Email address", text: $email)
@@ -75,12 +87,9 @@ struct LoginView: View {
                 
                 // Login button
                 Button(action: {
-                    // Action for login
                     
-                    
-                    
+                  
                 }) {
-                   
                     Text("Log in")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -89,12 +98,10 @@ struct LoginView: View {
                         .background(Color.blue)
                         .cornerRadius(10.0)
                         .padding(.top, 20)
-//
                 }
-          
                 
                 // Or Login with
-//                Text("Or Login with")
+//                Text("Or Sign up with")
 //                    .padding(.top, 30)
 //                
 //                HStack(spacing: 20) {
@@ -124,11 +131,12 @@ struct LoginView: View {
 //                    }
 //                }
 //                .padding(.top, 10)
-//                
+                
                 // Sign up link
                 HStack {
                     Text("Don’t have an account?")
-                    NavigationLink(destination: PersonalDetailsForm()) {
+                    NavigationLink(destination:
+                                    PersonalDetailsForm()) {
                         Text("Sign up")
                             .foregroundColor(.blue)
                     }
@@ -170,11 +178,5 @@ struct LoginView: View {
                 }
             }
         }
-    }
-}
-
-struct ContentsView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
     }
 }
