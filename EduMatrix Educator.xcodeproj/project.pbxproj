@@ -11,6 +11,7 @@
 		A98806A02C3568CF005D2F17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988069F2C3568CF005D2F17 /* ContentView.swift */; };
 		A98806A22C3568D0005D2F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98806A12C3568D0005D2F17 /* Assets.xcassets */; };
 		A98806A52C3568D0005D2F17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98806A42C3568D0005D2F17 /* Preview Assets.xcassets */; };
+		E5D01D0D2C36829B00C348AD /* PersonalDetailsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		A988069F2C3568CF005D2F17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A98806A12C3568D0005D2F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A98806A42C3568D0005D2F17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailsForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */,
 				A988069F2C3568CF005D2F17 /* ContentView.swift */,
+				E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */,
 				A98806A12C3568D0005D2F17 /* Assets.xcassets */,
 				A98806A32C3568D0005D2F17 /* Preview Content */,
 			);
@@ -139,6 +142,7 @@
 			files = (
 				A98806A02C3568CF005D2F17 /* ContentView.swift in Sources */,
 				A988069E2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift in Sources */,
+				E5D01D0D2C36829B00C348AD /* PersonalDetailsForm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

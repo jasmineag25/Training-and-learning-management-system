@@ -11,7 +11,7 @@ import SwiftUI
 struct EduMatrix_EducatorApp: App {
     var body: some Scene {
         WindowGroup {
-            PersonalDetailsForm()
+            LoginView()
         }
     }
 }
