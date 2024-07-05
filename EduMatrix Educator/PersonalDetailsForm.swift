@@ -4,6 +4,7 @@ import FirebaseFirestore
 struct PersonalDetailsForm: View {
     @State private var name: String = ""
     @State private var email: String = ""
+    @State private var about: String = ""
     @State private var mobileNumber: String = ""
     @State private var qualification: String = "Graduation"
     @State private var experience: String = "1 year"
@@ -12,6 +13,7 @@ struct PersonalDetailsForm: View {
     @State private var selectedImage: UIImage? = nil
     @State private var isShowingImagePicker = false
     @State private var isUploadingImage = false
+    @State private var goToLogin: Bool = false
 
     var body: some View {
         NavigationView {
@@ -63,6 +65,9 @@ struct PersonalDetailsForm: View {
                     }
                 }
 
+                Section(header: Text("More About Yourself")){
+                    TextField("Your Achievements, Your Awards etc. ", text: $about).frame(height: 150)
+                }
                 Section(header: Text("Document Upload")) {
                     VStack {
                         if let selectedImage = selectedImage {
@@ -97,6 +102,8 @@ struct PersonalDetailsForm: View {
                 
                 Button(action: {
                     submitRequest()
+                    goToLogin = true
+                    
                 }) {
                     Text("Submit")
                       .frame(maxWidth:.infinity)
@@ -106,12 +113,18 @@ struct PersonalDetailsForm: View {
                       .cornerRadius(8)
                 }
                 
+                NavigationLink(destination: LoginView(), isActive: $goToLogin){
+                    EmptyView()
+                }
+                
             }
            .sheet(isPresented: $isShowingImagePicker) {
                 ImagePickerView(image: $selectedImage)
             }
            .navigationTitle("Personal Details")
+           
         }
+        
     }
     
     func submitRequest() {
@@ -123,7 +136,8 @@ struct PersonalDetailsForm: View {
                 "qualification": qualification,
                 "experience": experience,
                 "subjectDomain": subjectDomain,
-                "language": language
+                "language": language,
+                "about" : about
             ]
 
         db.collection("educatorsRequests").addDocument(data: userData) { err in
@@ -133,6 +147,7 @@ struct PersonalDetailsForm: View {
                     print("Document added successfully")
                 }
             }
+        
         }
 }
 
