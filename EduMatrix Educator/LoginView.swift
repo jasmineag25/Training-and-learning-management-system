@@ -1,6 +1,5 @@
 import SwiftUI
 import FirebaseAuth
-import FirebaseFirestore
 
 struct LoginView: View {
     @State private var email = ""
@@ -94,37 +93,37 @@ struct LoginView: View {
           
                 
                 // Or Login with
-//                Text("Or Login with")
-//                    .padding(.top, 30)
-//                
-//                HStack(spacing: 20) {
-//                    Button(action: {
-//                        // Action for Facebook login
-//                    }) {
-//                        Image(systemName: "f.square.fill")
-//                            .resizable()
-//                            .frame(width: 30, height: 30)
-//                            .foregroundColor(.blue)
-//                    }
-//                    Button(action: {
-//                        // Action for Google login
-//                    }) {
-//                        Image(systemName: "g.circle.fill")
-//                            .resizable()
-//                            .frame(width: 30, height: 30)
-//                            .foregroundColor(.red)
-//                    }
-//                    Button(action: {
-//                        // Action for Apple login
-//                    }) {
-//                        Image(systemName: "applelogo")
-//                            .resizable()
-//                            .frame(width: 30, height: 30)
-//                            .foregroundColor(.black)
-//                    }
-//                }
-//                .padding(.top, 10)
-//                
+                Text("Or Login with")
+                    .padding(.top, 30)
+                
+                HStack(spacing: 20) {
+                    Button(action: {
+                        // Action for Facebook login
+                    }) {
+                        Image(systemName: "f.square.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.blue)
+                    }
+                    Button(action: {
+                        // Action for Google login
+                    }) {
+                        Image(systemName: "g.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.red)
+                    }
+                    Button(action: {
+                        // Action for Apple login
+                    }) {
+                        Image(systemName: "applelogo")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.black)
+                    }
+                }
+                .padding(.top, 10)
+                
                 // Sign up link
                 HStack {
                     Text("Don’t have an account?")
@@ -138,37 +137,6 @@ struct LoginView: View {
                 Spacer()
             }
             .padding(.horizontal, 30)
-        }
-    }
-    
-    func checkLoginCredentials(email: String, password: String, expectedRole: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            } else {
-                guard let userID = authResult?.user.uid else { return }
-                let db = Firestore.firestore()
-                let docRef = db.collection("users").document(userID)
-                docRef.getDocument { (document, error) in
-                    if let document = document, document.exists {
-                        let data = document.data()
-                        let role = data?["role"] as? String
-                        if role == expectedRole {
-                            print("User signed in successfully with role: \(role ?? "")")
-                        } else {
-                            print("User role mismatch. Expected: \(expectedRole), Found: \(role ?? "")")
-                            // Sign out the user if the role does not match
-                            do {
-                                try Auth.auth().signOut()
-                            } catch let signOutError as NSError {
-                                print("Error signing out: \(signOutError)")
-                            }
-                        }
-                    } else {
-                        print("Document does not exist")
-                    }
-                }
-            }
         }
     }
 }

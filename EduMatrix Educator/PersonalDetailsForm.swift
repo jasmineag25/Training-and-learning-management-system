@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseFirestore
 
 struct PersonalDetailsForm: View {
     @State private var name: String = ""
@@ -93,31 +94,9 @@ struct PersonalDetailsForm: View {
                 .sheet(isPresented: $isShowingImagePicker) {
                     ImagePickerView(image: $selectedImage)
                 }
-
-//                Section {
-//                    Button(action: {
-//                        // Handle form submission here
-//                        print("Form submitted!")
-//                    }) {
-//                        Text("Submit")
-//                            .frame(maxWidth:.infinity, maxHeight: 12)
-//                           .padding()
-//                           .background(Color.blue)
-//                           .foregroundColor(.white)
-//                           .cornerRadius(8)
-//                    }
-//                }
+                
                 Button(action: {
-                    // Reset all the data
-                    self.name = ""
-                    self.email = ""
-                    self.mobileNumber = ""
-                    self.qualification = "Graduation"
-                    self.experience = "1 year"
-                    self.subjectDomain = "Web Tech"
-                    self.language = "English"
-                    self.selectedImage = nil
-                    print("Form submitted")
+                    submitRequest()
                 }) {
                     Text("Submit")
                       .frame(maxWidth:.infinity)
@@ -134,6 +113,27 @@ struct PersonalDetailsForm: View {
            .navigationTitle("Personal Details")
         }
     }
+    
+    func submitRequest() {
+            let db = Firestore.firestore()
+            let userData: [String: Any] = [
+                "name": name,
+                "email": email,
+                "mobileNumber": mobileNumber,
+                "qualification": qualification,
+                "experience": experience,
+                "subjectDomain": subjectDomain,
+                "language": language
+            ]
+
+        db.collection("educatorsRequests").addDocument(data: userData) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added successfully")
+                }
+            }
+        }
 }
 
 struct ImagePickerView: UIViewControllerRepresentable {
