@@ -79,7 +79,6 @@
 		A988069C2C3568CF005D2F17 /* EduMatrix Educator */ = {
 			isa = PBXGroup;
 			children = (
-				C54B0A932C37BBA900A16234 /* Videw */,
 				C54B0A872C37A9B800A16234 /* Model */,
 				A92821102C3720B600D137B6 /* GoogleService-Info.plist */,
 				A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */,
@@ -112,13 +111,6 @@
 				C54B0A882C37A9EF00A16234 /* Course.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		C54B0A932C37BBA900A16234 /* Videw */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Videw;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

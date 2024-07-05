@@ -81,7 +81,6 @@ struct LoginView: View {
                     // Action for login
                     checkLoginCredentials(email: email, password: password, expectedRole: "educator")
                     
-                    isSignIn=true
                     
                 }) {
                    
@@ -163,6 +162,7 @@ struct LoginView: View {
                         let role = data?["role"] as? String
                         if role == expectedRole {
 //                            navigateToHome.toggle()
+                            isSignIn = true
                             print("User signed in successfully with role: \(role ?? "")")
                         } else {
                             print("User role mismatch. Expected: \(expectedRole), Found: \(role ?? "")")
