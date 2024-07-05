@@ -6,6 +6,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isPasswordVisible = false
+    @State private var isSignIn: Bool = false
     
     init() {
         self.navigationBarBackButtonHidden()
@@ -66,22 +67,21 @@ struct LoginView: View {
                 
                 // Forgot password
                 HStack {
-                    Spacer()
-                    Button(action: {
-                        // Action for forgot password
-                    }) {
-                        Text("Forgot password?")
-                            .font(.system(size: 14))
-                            .foregroundColor(.blue)
-                    }
-                }
-                .padding(.top, 5)
+                                    Spacer()
+                                    NavigationLink(destination: ForgotPasswordView()) {
+                                        Text("Forgot password?")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.blue)
+                                    }
+                                }
+                                .padding(.top, 5)
                 
                 // Login button
                 Button(action: {
                     // Action for login
                     checkLoginCredentials(email: email, password: password, expectedRole: "educator")
                     
+                    isSignIn=true
                     
                 }) {
                    
@@ -94,6 +94,9 @@ struct LoginView: View {
                         .cornerRadius(10.0)
                         .padding(.top, 20)
 
+                }
+               NavigationLink(destination: ContentView(), isActive: $isSignIn) {
+                    EmptyView()
                 }
           
                 
@@ -142,6 +145,7 @@ struct LoginView: View {
                 Spacer()
             }
             .padding(.horizontal, 30)
+            .navigationBarHidden(true)
         }
     }
     
