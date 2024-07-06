@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseAuth
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -20,10 +21,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct EduMatrix_EducatorApp: App {
     @StateObject private var courseStore = CourseStore()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            VStack() {
+                if Auth.auth().currentUser == nil {
+                    LoginView()
+                } else {
+                    ContentView()
+                }
+            }
         }
     }
 }

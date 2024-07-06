@@ -42,6 +42,7 @@
 		C55FD5552C395B65007D9C59 /* CourseImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5542C395B65007D9C59 /* CourseImagePicker.swift */; };
 		C55FD5572C395B98007D9C59 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5562C395B98007D9C59 /* SubmitButton.swift */; };
 		C55FD5592C395BB2007D9C59 /* NavigationLinkButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5582C395BB2007D9C59 /* NavigationLinkButtons.swift */; };
+		C55FD55B2C3971D7007D9C59 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD55A2C3971D7007D9C59 /* ViewRouter.swift */; };
 		E5D01D0D2C36829B00C348AD /* PersonalDetailsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		C55FD5542C395B65007D9C59 /* CourseImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseImagePicker.swift; sourceTree = "<group>"; };
 		C55FD5562C395B98007D9C59 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		C55FD5582C395BB2007D9C59 /* NavigationLinkButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkButtons.swift; sourceTree = "<group>"; };
+		C55FD55A2C3971D7007D9C59 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailsForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +182,7 @@
 				C54B0A982C37C7D100A16234 /* OTPView.swift */,
 				C54B0A9A2C37C88800A16234 /* ResetPasswordView.swift */,
 				C54B0A9C2C37C94C00A16234 /* ResetSuccessView.swift */,
+				C55FD55A2C3971D7007D9C59 /* ViewRouter.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				C54B0A8B2C37ABDE00A16234 /* ContentView.swift in Sources */,
 				C55FD54C2C39574F007D9C59 /* VideoPicker.swift in Sources */,
 				C54B0A992C37C7D100A16234 /* OTPView.swift in Sources */,
+				C55FD55B2C3971D7007D9C59 /* ViewRouter.swift in Sources */,
 				C54B0A892C37A9EF00A16234 /* Course.swift in Sources */,
 				C55FD54A2C3956AF007D9C59 /* NotePicker.swift in Sources */,
 				C54B0A9B2C37C88800A16234 /* ResetPasswordView.swift in Sources */,
