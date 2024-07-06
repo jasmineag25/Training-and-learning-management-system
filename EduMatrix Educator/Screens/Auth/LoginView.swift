@@ -7,6 +7,7 @@ struct LoginView: View {
     @State private var password = ""
     @State private var isPasswordVisible = false
     @State private var isSignIn: Bool = false
+    @EnvironmentObject var viewRouter: ViewRouter
     
     init() {
         self.navigationBarBackButtonHidden()
@@ -164,6 +165,7 @@ struct LoginView: View {
 //                            navigateToHome.toggle()
                             isSignIn = true
                             print("User signed in successfully with role: \(role ?? "")")
+                        viewRouter.currentPage = .contentView
                         } else {
                             print("User role mismatch. Expected: \(expectedRole), Found: \(role ?? "")")
                             // Sign out the user if the role does not match

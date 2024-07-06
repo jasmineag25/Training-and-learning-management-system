@@ -6,10 +6,45 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct HomeView: View {
+    @EnvironmentObject var viewRouter: ViewRouter
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+                   Text("Welcome to Your App!")
+                       .font(.title)
+                       .padding()
+                   
+                   // Add more content as needed
+                   
+                   Button(action: {
+                       // Action for sign out
+                       signOut()
+                   }) {
+                       Text("Sign Out")
+                           .font(.headline)
+                           .foregroundColor(.white)
+                           .padding()
+                           .frame(width: 220, height: 50)
+                           .background(Color.red) // Use any color you prefer
+                           .cornerRadius(10.0)
+                           .padding(.top, 20)
+                   }
+                   
+                   Spacer()
+               }
+               .padding()
+           }
+           
+           func signOut() {
+               do {
+                   try Auth.auth().signOut()
+                   // Navigate back to login or initial screen
+                   viewRouter.currentPage = .loginView // Adjust as per your ViewRouter setup
+               } catch let signOutError as NSError {
+                   print("Error signing out: \(signOutError.localizedDescription)")
+               }
 //           NavigationView {
 //               ScrollView {
 //                   VStack(alignment: .leading) {

@@ -8,10 +8,10 @@ import Foundation
 import SwiftUI
 
 class ViewRouter: ObservableObject {
-    @Published var currentPage: Page = .signPage
+    @Published var currentPage: Page = .loginView
 }
 
 enum Page {
-    case signPage
-    case homePage
+    case loginView
+    case contentView
 }

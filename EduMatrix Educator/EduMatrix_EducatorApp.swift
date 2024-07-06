@@ -21,15 +21,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct EduMatrix_EducatorApp: App {
     @StateObject private var courseStore = CourseStore()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @EnvironmentObject var viewRouter: ViewRouter
+    @StateObject private var viewRouter = ViewRouter()
     
     var body: some Scene {
         WindowGroup {
             VStack() {
                 if Auth.auth().currentUser == nil {
                     LoginView()
+                     .environmentObject(viewRouter)
                 } else {
                     ContentView()
+                        .environmentObject(viewRouter)
                 }
             }
         }
