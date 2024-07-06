@@ -1,17 +1,27 @@
-//
-//  Course.swift
-//  EduMatrix Educator
-//
-//  Created by Shahiyan Khan on 05/07/24.
-//
-
 import Foundation
 
 struct Course: Identifiable {
-    var id = UUID()
-    var title: String
-    var author: String
-    var rating: Int
+    var id: UUID
+    var name: String
+    var description: String
+    var duration: String
+    var language: String
     var price: String
-    var imageName: String
+    var category: String
+    var keywords: [String]
+    var imageUrl: URL?
+    var videos: [Video]
+    var notes: [Note]
+}
+
+struct Video: Identifiable {
+    var id: UUID
+    var title: String
+    var url: URL
+}
+
+struct Note: Identifiable {
+    var id: UUID
+    var title: String
+    var url: URL
 }

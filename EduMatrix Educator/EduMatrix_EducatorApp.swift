@@ -18,6 +18,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct EduMatrix_EducatorApp: App {
+    @StateObject private var courseStore = CourseStore()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {

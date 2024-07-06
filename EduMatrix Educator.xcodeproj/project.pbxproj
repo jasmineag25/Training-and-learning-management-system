@@ -24,6 +24,24 @@
 		C54B0A992C37C7D100A16234 /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B0A982C37C7D100A16234 /* OTPView.swift */; };
 		C54B0A9B2C37C88800A16234 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B0A9A2C37C88800A16234 /* ResetPasswordView.swift */; };
 		C54B0A9D2C37C94C00A16234 /* ResetSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B0A9C2C37C94C00A16234 /* ResetSuccessView.swift */; };
+		C55FD5332C37E6C5007D9C59 /* AddCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5322C37E6C5007D9C59 /* AddCourse.swift */; };
+		C55FD5352C37E6FD007D9C59 /* VideoUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5342C37E6FD007D9C59 /* VideoUploadView.swift */; };
+		C55FD5372C37E759007D9C59 /* NoteUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5362C37E759007D9C59 /* NoteUploadView.swift */; };
+		C55FD5392C37E777007D9C59 /* QuizUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5382C37E777007D9C59 /* QuizUploadView.swift */; };
+		C55FD53B2C37E7BA007D9C59 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD53A2C37E7BA007D9C59 /* FileType.swift */; };
+		C55FD53D2C37F561007D9C59 /* CourseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD53C2C37F561007D9C59 /* CourseStore.swift */; };
+		C55FD53F2C3814F0007D9C59 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD53E2C3814F0007D9C59 /* SearchBar.swift */; };
+		C55FD5412C38153C007D9C59 /* TopSellingCoursesChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5402C38153C007D9C59 /* TopSellingCoursesChart.swift */; };
+		C55FD5432C381578007D9C59 /* CourseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5422C381578007D9C59 /* CourseCard.swift */; };
+		C55FD5482C395678007D9C59 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5472C395678007D9C59 /* ImagePicker.swift */; };
+		C55FD54A2C3956AF007D9C59 /* NotePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5492C3956AF007D9C59 /* NotePicker.swift */; };
+		C55FD54C2C39574F007D9C59 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD54B2C39574F007D9C59 /* VideoPicker.swift */; };
+		C55FD54F2C395A40007D9C59 /* CourseTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD54E2C395A40007D9C59 /* CourseTextFieldView.swift */; };
+		C55FD5512C395AB6007D9C59 /* CoursePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5502C395AB6007D9C59 /* CoursePickerView.swift */; };
+		C55FD5532C395B4B007D9C59 /* CourseKeywordPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5522C395B4B007D9C59 /* CourseKeywordPickerView.swift */; };
+		C55FD5552C395B65007D9C59 /* CourseImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5542C395B65007D9C59 /* CourseImagePicker.swift */; };
+		C55FD5572C395B98007D9C59 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5562C395B98007D9C59 /* SubmitButton.swift */; };
+		C55FD5592C395BB2007D9C59 /* NavigationLinkButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5582C395BB2007D9C59 /* NavigationLinkButtons.swift */; };
 		E5D01D0D2C36829B00C348AD /* PersonalDetailsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +60,24 @@
 		C54B0A982C37C7D100A16234 /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		C54B0A9A2C37C88800A16234 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		C54B0A9C2C37C94C00A16234 /* ResetSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetSuccessView.swift; sourceTree = "<group>"; };
+		C55FD5322C37E6C5007D9C59 /* AddCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourse.swift; sourceTree = "<group>"; };
+		C55FD5342C37E6FD007D9C59 /* VideoUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadView.swift; sourceTree = "<group>"; };
+		C55FD5362C37E759007D9C59 /* NoteUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUploadView.swift; sourceTree = "<group>"; };
+		C55FD5382C37E777007D9C59 /* QuizUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizUploadView.swift; sourceTree = "<group>"; };
+		C55FD53A2C37E7BA007D9C59 /* FileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
+		C55FD53C2C37F561007D9C59 /* CourseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseStore.swift; sourceTree = "<group>"; };
+		C55FD53E2C3814F0007D9C59 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		C55FD5402C38153C007D9C59 /* TopSellingCoursesChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSellingCoursesChart.swift; sourceTree = "<group>"; };
+		C55FD5422C381578007D9C59 /* CourseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCard.swift; sourceTree = "<group>"; };
+		C55FD5472C395678007D9C59 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C55FD5492C3956AF007D9C59 /* NotePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePicker.swift; sourceTree = "<group>"; };
+		C55FD54B2C39574F007D9C59 /* VideoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
+		C55FD54E2C395A40007D9C59 /* CourseTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTextFieldView.swift; sourceTree = "<group>"; };
+		C55FD5502C395AB6007D9C59 /* CoursePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePickerView.swift; sourceTree = "<group>"; };
+		C55FD5522C395B4B007D9C59 /* CourseKeywordPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseKeywordPickerView.swift; sourceTree = "<group>"; };
+		C55FD5542C395B65007D9C59 /* CourseImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseImagePicker.swift; sourceTree = "<group>"; };
+		C55FD5562C395B98007D9C59 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
+		C55FD5582C395BB2007D9C59 /* NavigationLinkButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkButtons.swift; sourceTree = "<group>"; };
 		E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailsForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,20 +115,17 @@
 		A988069C2C3568CF005D2F17 /* EduMatrix Educator */ = {
 			isa = PBXGroup;
 			children = (
+				C55FD5442C394507007D9C59 /* Screens */,
 				C54B0A872C37A9B800A16234 /* Model */,
 				A92821102C3720B600D137B6 /* GoogleService-Info.plist */,
 				A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */,
-				C54B0A962C37C73600A16234 /* ForgotPasswordView.swift */,
-				C54B0A8E2C37AF4800A16234 /* CourseView.swift */,
-				A988069F2C3568CF005D2F17 /* LoginView.swift */,
-				E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */,
 				A98806A12C3568D0005D2F17 /* Assets.xcassets */,
 				A98806A32C3568D0005D2F17 /* Preview Content */,
 				C54B0A8A2C37ABDE00A16234 /* ContentView.swift */,
 				C54B0A8C2C37AD3900A16234 /* HomeView.swift */,
-				C54B0A982C37C7D100A16234 /* OTPView.swift */,
-				C54B0A9A2C37C88800A16234 /* ResetPasswordView.swift */,
-				C54B0A9C2C37C94C00A16234 /* ResetSuccessView.swift */,
+				C55FD53E2C3814F0007D9C59 /* SearchBar.swift */,
+				C55FD5402C38153C007D9C59 /* TopSellingCoursesChart.swift */,
+				C55FD5422C381578007D9C59 /* CourseCard.swift */,
 			);
 			path = "EduMatrix Educator";
 			sourceTree = "<group>";
@@ -111,6 +144,67 @@
 				C54B0A882C37A9EF00A16234 /* Course.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C55FD5312C37E681007D9C59 /* CourseViews */ = {
+			isa = PBXGroup;
+			children = (
+				C55FD54D2C395A18007D9C59 /* ReusableViews */,
+				C55FD5462C39561D007D9C59 /* Picker */,
+				C55FD5322C37E6C5007D9C59 /* AddCourse.swift */,
+				C54B0A8E2C37AF4800A16234 /* CourseView.swift */,
+				C55FD5342C37E6FD007D9C59 /* VideoUploadView.swift */,
+				C55FD5362C37E759007D9C59 /* NoteUploadView.swift */,
+				C55FD5382C37E777007D9C59 /* QuizUploadView.swift */,
+				C55FD53A2C37E7BA007D9C59 /* FileType.swift */,
+				C55FD53C2C37F561007D9C59 /* CourseStore.swift */,
+			);
+			path = CourseViews;
+			sourceTree = "<group>";
+		};
+		C55FD5442C394507007D9C59 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C55FD5312C37E681007D9C59 /* CourseViews */,
+				C55FD5452C394553007D9C59 /* Auth */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		C55FD5452C394553007D9C59 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A988069F2C3568CF005D2F17 /* LoginView.swift */,
+				C54B0A962C37C73600A16234 /* ForgotPasswordView.swift */,
+				E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */,
+				C54B0A982C37C7D100A16234 /* OTPView.swift */,
+				C54B0A9A2C37C88800A16234 /* ResetPasswordView.swift */,
+				C54B0A9C2C37C94C00A16234 /* ResetSuccessView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		C55FD5462C39561D007D9C59 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				C55FD5472C395678007D9C59 /* ImagePicker.swift */,
+				C55FD5492C3956AF007D9C59 /* NotePicker.swift */,
+				C55FD54B2C39574F007D9C59 /* VideoPicker.swift */,
+			);
+			path = Picker;
+			sourceTree = "<group>";
+		};
+		C55FD54D2C395A18007D9C59 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				C55FD54E2C395A40007D9C59 /* CourseTextFieldView.swift */,
+				C55FD5502C395AB6007D9C59 /* CoursePickerView.swift */,
+				C55FD5522C395B4B007D9C59 /* CourseKeywordPickerView.swift */,
+				C55FD5542C395B65007D9C59 /* CourseImagePicker.swift */,
+				C55FD5562C395B98007D9C59 /* SubmitButton.swift */,
+				C55FD5582C395BB2007D9C59 /* NavigationLinkButtons.swift */,
+			);
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,16 +288,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				C54B0A8D2C37AD3900A16234 /* HomeView.swift in Sources */,
+				C55FD54F2C395A40007D9C59 /* CourseTextFieldView.swift in Sources */,
 				C54B0A8F2C37AF4800A16234 /* CourseView.swift in Sources */,
 				C54B0A972C37C73600A16234 /* ForgotPasswordView.swift in Sources */,
+				C55FD5482C395678007D9C59 /* ImagePicker.swift in Sources */,
+				C55FD5392C37E777007D9C59 /* QuizUploadView.swift in Sources */,
 				A98806A02C3568CF005D2F17 /* LoginView.swift in Sources */,
+				C55FD53F2C3814F0007D9C59 /* SearchBar.swift in Sources */,
+				C55FD5352C37E6FD007D9C59 /* VideoUploadView.swift in Sources */,
+				C55FD5552C395B65007D9C59 /* CourseImagePicker.swift in Sources */,
+				C55FD5332C37E6C5007D9C59 /* AddCourse.swift in Sources */,
+				C55FD53D2C37F561007D9C59 /* CourseStore.swift in Sources */,
 				C54B0A8B2C37ABDE00A16234 /* ContentView.swift in Sources */,
+				C55FD54C2C39574F007D9C59 /* VideoPicker.swift in Sources */,
 				C54B0A992C37C7D100A16234 /* OTPView.swift in Sources */,
 				C54B0A892C37A9EF00A16234 /* Course.swift in Sources */,
+				C55FD54A2C3956AF007D9C59 /* NotePicker.swift in Sources */,
 				C54B0A9B2C37C88800A16234 /* ResetPasswordView.swift in Sources */,
+				C55FD53B2C37E7BA007D9C59 /* FileType.swift in Sources */,
+				C55FD5432C381578007D9C59 /* CourseCard.swift in Sources */,
 				A988069E2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift in Sources */,
+				C55FD5412C38153C007D9C59 /* TopSellingCoursesChart.swift in Sources */,
+				C55FD5592C395BB2007D9C59 /* NavigationLinkButtons.swift in Sources */,
+				C55FD5532C395B4B007D9C59 /* CourseKeywordPickerView.swift in Sources */,
+				C55FD5372C37E759007D9C59 /* NoteUploadView.swift in Sources */,
 				C54B0A9D2C37C94C00A16234 /* ResetSuccessView.swift in Sources */,
+				C55FD5572C395B98007D9C59 /* SubmitButton.swift in Sources */,
 				E5D01D0D2C36829B00C348AD /* PersonalDetailsForm.swift in Sources */,
+				C55FD5512C395AB6007D9C59 /* CoursePickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
