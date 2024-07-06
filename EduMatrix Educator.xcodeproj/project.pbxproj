@@ -43,6 +43,12 @@
 		C55FD5572C395B98007D9C59 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5562C395B98007D9C59 /* SubmitButton.swift */; };
 		C55FD5592C395BB2007D9C59 /* NavigationLinkButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5582C395BB2007D9C59 /* NavigationLinkButtons.swift */; };
 		C55FD55B2C3971D7007D9C59 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD55A2C3971D7007D9C59 /* ViewRouter.swift */; };
+		C55FD55E2C39CF69007D9C59 /* Screen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD55D2C39CF69007D9C59 /* Screen1.swift */; };
+		C55FD5602C39CF75007D9C59 /* Screen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD55F2C39CF75007D9C59 /* Screen2.swift */; };
+		C55FD5622C39CF81007D9C59 /* Screen3.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5612C39CF81007D9C59 /* Screen3.swift */; };
+		C55FD5642C39CF8D007D9C59 /* Screen4.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5632C39CF8D007D9C59 /* Screen4.swift */; };
+		C55FD5662C39D159007D9C59 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5652C39D159007D9C59 /* OnboardingView.swift */; };
+		C55FD5692C39D32F007D9C59 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD5682C39D32F007D9C59 /* Colors.swift */; };
 		E5D01D0D2C36829B00C348AD /* PersonalDetailsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +86,12 @@
 		C55FD5562C395B98007D9C59 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		C55FD5582C395BB2007D9C59 /* NavigationLinkButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkButtons.swift; sourceTree = "<group>"; };
 		C55FD55A2C3971D7007D9C59 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		C55FD55D2C39CF69007D9C59 /* Screen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1.swift; sourceTree = "<group>"; };
+		C55FD55F2C39CF75007D9C59 /* Screen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2.swift; sourceTree = "<group>"; };
+		C55FD5612C39CF81007D9C59 /* Screen3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen3.swift; sourceTree = "<group>"; };
+		C55FD5632C39CF8D007D9C59 /* Screen4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen4.swift; sourceTree = "<group>"; };
+		C55FD5652C39D159007D9C59 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		C55FD5682C39D32F007D9C59 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E5D01D0C2C36829B00C348AD /* PersonalDetailsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailsForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +129,7 @@
 		A988069C2C3568CF005D2F17 /* EduMatrix Educator */ = {
 			isa = PBXGroup;
 			children = (
+				C55FD5672C39D31F007D9C59 /* Extensions */,
 				C55FD5442C394507007D9C59 /* Screens */,
 				C54B0A872C37A9B800A16234 /* Model */,
 				A92821102C3720B600D137B6 /* GoogleService-Info.plist */,
@@ -167,6 +180,7 @@
 		C55FD5442C394507007D9C59 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C55FD55C2C39CF4A007D9C59 /* Onboarding */,
 				C55FD5312C37E681007D9C59 /* CourseViews */,
 				C55FD5452C394553007D9C59 /* Auth */,
 			);
@@ -208,6 +222,26 @@
 				C55FD5582C395BB2007D9C59 /* NavigationLinkButtons.swift */,
 			);
 			path = ReusableViews;
+			sourceTree = "<group>";
+		};
+		C55FD55C2C39CF4A007D9C59 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				C55FD55D2C39CF69007D9C59 /* Screen1.swift */,
+				C55FD55F2C39CF75007D9C59 /* Screen2.swift */,
+				C55FD5612C39CF81007D9C59 /* Screen3.swift */,
+				C55FD5632C39CF8D007D9C59 /* Screen4.swift */,
+				C55FD5652C39D159007D9C59 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		C55FD5672C39D31F007D9C59 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C55FD5682C39D32F007D9C59 /* Colors.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C54B0A8D2C37AD3900A16234 /* HomeView.swift in Sources */,
+				C55FD5692C39D32F007D9C59 /* Colors.swift in Sources */,
 				C55FD54F2C395A40007D9C59 /* CourseTextFieldView.swift in Sources */,
 				C54B0A8F2C37AF4800A16234 /* CourseView.swift in Sources */,
 				C54B0A972C37C73600A16234 /* ForgotPasswordView.swift in Sources */,
@@ -302,6 +337,8 @@
 				C55FD5552C395B65007D9C59 /* CourseImagePicker.swift in Sources */,
 				C55FD5332C37E6C5007D9C59 /* AddCourse.swift in Sources */,
 				C55FD53D2C37F561007D9C59 /* CourseStore.swift in Sources */,
+				C55FD5642C39CF8D007D9C59 /* Screen4.swift in Sources */,
+				C55FD5662C39D159007D9C59 /* OnboardingView.swift in Sources */,
 				C54B0A8B2C37ABDE00A16234 /* ContentView.swift in Sources */,
 				C55FD54C2C39574F007D9C59 /* VideoPicker.swift in Sources */,
 				C54B0A992C37C7D100A16234 /* OTPView.swift in Sources */,
@@ -316,8 +353,11 @@
 				C55FD5592C395BB2007D9C59 /* NavigationLinkButtons.swift in Sources */,
 				C55FD5532C395B4B007D9C59 /* CourseKeywordPickerView.swift in Sources */,
 				C55FD5372C37E759007D9C59 /* NoteUploadView.swift in Sources */,
+				C55FD5602C39CF75007D9C59 /* Screen2.swift in Sources */,
 				C54B0A9D2C37C94C00A16234 /* ResetSuccessView.swift in Sources */,
+				C55FD55E2C39CF69007D9C59 /* Screen1.swift in Sources */,
 				C55FD5572C395B98007D9C59 /* SubmitButton.swift in Sources */,
+				C55FD5622C39CF81007D9C59 /* Screen3.swift in Sources */,
 				E5D01D0D2C36829B00C348AD /* PersonalDetailsForm.swift in Sources */,
 				C55FD5512C395AB6007D9C59 /* CoursePickerView.swift in Sources */,
 			);
