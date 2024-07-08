@@ -46,19 +46,12 @@ struct CourseRow: View {
     
     var body: some View {
         HStack {
-            if let imageUrl = course.imageUrl, let uiImage = UIImage(contentsOfFile: imageUrl.path) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding(.trailing, 10)
-            } else {
-                Image(systemName: "photo")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding(.trailing, 10)
-            }
+//            Image(uiImage: course.imageUrl)
+//                .resizable()
+//                .frame(width: 50, height: 50)
+//                .clipShape(RoundedRectangle(cornerRadius: 10))
+//                .padding(.trailing, 10)
+
             VStack(alignment: .leading) {
                 Text(course.name)
                     .font(.headline)

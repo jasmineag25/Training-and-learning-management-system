@@ -1,10 +1,12 @@
 import SwiftUI
 import FirebaseFirestore
+import FirebaseStorage
 
 struct PersonalDetailsForm: View {
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var about: String = ""
+    @State private var aadharImage : UIImage?
     @State private var mobileNumber: String = ""
     @State private var qualification: String = "Graduation"
     @State private var experience: String = "1 year"
@@ -12,8 +14,8 @@ struct PersonalDetailsForm: View {
     @State private var language: String = "English"
     @State private var selectedImage: UIImage? = nil
     @State private var isShowingImagePicker = false
-    @State private var isUploadingImage = false
-    @State private var goToLogin: Bool = false
+    @Environment(\.presentationMode) var presentationMode
+
 
     var body: some View {
         NavigationView {
@@ -69,40 +71,15 @@ struct PersonalDetailsForm: View {
                     TextField("Your Achievements, Your Awards etc. ", text: $about).frame(height: 150)
                 }
                 Section(header: Text("Document Upload")) {
-                    VStack {
-                        if let selectedImage = selectedImage {
-                            Image(uiImage: selectedImage)
-                               .resizable()
-                               .frame(maxWidth:.infinity, maxHeight: 200)
-                               .clipped()
-                        } else {
-                            Text("No image selected")
-                        }
-                        if isUploadingImage {
-                            ProgressView()
-                        } else {
-                            Button(action: {
-                                self.isShowingImagePicker = true
-                                // Upload the selected image here
-                                //...
-                            }) {
-                                Text("Upload")
-                                   .frame(maxWidth:.infinity,maxHeight: 12)
-                                   .padding()
-                                   .background(Color.blue)
-                                   .foregroundColor(.white)
-                                   .cornerRadius(8)
-                            }
-                        }
-                    }
-                }
-                .sheet(isPresented: $isShowingImagePicker) {
-                    ImagePickerView(image: $selectedImage)
+                    CourseImagePicker(selectedImage: $selectedImage, isShowingImagePicker: $isShowingImagePicker)
                 }
                 
                 Button(action: {
-                    submitRequest()
-                    goToLogin = true
+                    submitEducatorRequest(name: name, aadharImage: selectedImage!,profileImage: selectedImage!, email: email, mobileNumber: mobileNumber, qualification: qualification, experience: experience, subjectDomain: subjectDomain, language: language, about: about){ success in
+                        print(success)
+                        
+                    }
+                    presentationMode.wrappedValue.dismiss()
                     
                 }) {
                     Text("Submit")
@@ -113,10 +90,6 @@ struct PersonalDetailsForm: View {
                       .cornerRadius(8)
                 }
                 
-                NavigationLink(destination: LoginView(), isActive: $goToLogin){
-                    EmptyView()
-                }
-                
             }
            .sheet(isPresented: $isShowingImagePicker) {
                 ImagePickerView(image: $selectedImage)
@@ -124,31 +97,7 @@ struct PersonalDetailsForm: View {
            .navigationTitle("Personal Details")
            
         }
-        
     }
-    
-    func submitRequest() {
-            let db = Firestore.firestore()
-            let userData: [String: Any] = [
-                "name": name,
-                "email": email,
-                "mobileNumber": mobileNumber,
-                "qualification": qualification,
-                "experience": experience,
-                "subjectDomain": subjectDomain,
-                "language": language,
-                "about" : about
-            ]
-
-        db.collection("educatorsRequests").addDocument(data: userData) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    print("Document added successfully")
-                }
-            }
-        
-        }
 }
 
 struct ImagePickerView: UIViewControllerRepresentable {

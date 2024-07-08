@@ -9,24 +9,23 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
 
 struct ForgotPasswordView: View {
-    @State private var identifier: String = ""
+    @State private var email: String = ""
     @State private var showConfirmation: Bool = false
     @State private var showError: Bool = false
-    @State private var isRedirectingToOTPView :Bool=false
     @Environment(\.presentationMode) var presentationMode
-   // @StateObject var userViewModel = UserViewModel()
 
     var body: some View {
         NavigationView {
             VStack {
-                Image("Group 513886") // Use a system image or replace with your own image name
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 200, height: 200) // Adjust the size as needed
-                                    .padding(.top, 60) //
-                
+                Image("forgotPassword") // Use a system image or replace with your own image name
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 220, height: 220) // Adjust the size as needed
+                    .padding(.top, 30) //
+
 
                 VStack(spacing: 8) {
                     Text("Forgot password?")
@@ -39,9 +38,9 @@ struct ForgotPasswordView: View {
                     Text("Don’t worry! It happens. Please enter the email associated with your account.")
                         .font(.body)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal)
                         .padding(.bottom,10)
-                        .padding(.top,10)
                 }
                 .padding(.bottom, 40)
 
@@ -49,26 +48,40 @@ struct ForgotPasswordView: View {
                     Text("Email address")
                         .font(.headline)
 
-                    TextField("Enter your email address", text: $identifier)
+                    TextField("Enter your email address", text: $email)
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                if email.hasSuffix("@gmail.com") {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(.blue)
+                                        .padding()
+                                }
+                            }
+                        )
+
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 20)
                 
 
                 Button(action: {
-                    if identifier.isEmpty {
+                    if email.isEmpty {
                         showError = true
-                    } else {
-                        // Implement the action to handle forgot password here
+                    } 
+                    else if
+                        email.hasSuffix("@gmail.com") {
+                        sendResetPasswordLink()
                         showConfirmation = true
                     }
+                    
                 }) {
-                    Text("Send code")
+                    Text("Submit")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
@@ -77,10 +90,7 @@ struct ForgotPasswordView: View {
                         .cornerRadius(8)
                         .padding(.horizontal)
                 }
-                .padding(.bottom, 20)
-                
-                Spacer()
-                Spacer()
+                Spacer(minLength: 100)
                 HStack {
                     Text("Remember password?")
                         .font(.body)
@@ -93,10 +103,7 @@ struct ForgotPasswordView: View {
                             .foregroundColor(.blue)
                     }
                 }
-
-                Spacer()
             }
-            .padding()
             .alert(isPresented: $showError) {
                 Alert(
                     title: Text("Error"),
@@ -106,24 +113,25 @@ struct ForgotPasswordView: View {
                     }
                 )
             }
-            .alert(isPresented: $showConfirmation) {
-                            Alert(
-                                title: Text("Password Reset"),
-                                message: Text("An OTP has been sent to your mail."),
-                                dismissButton: .default(Text("OK")) {
-                                    showConfirmation = false // Reset the confirmation state
-                                    isRedirectingToOTPView = true // Activate navigation to OTPView
-                                }
-                            )
-                        }
-                        .background(
-                            NavigationLink(destination: OTPView(), isActive: $isRedirectingToOTPView) {
-                                EmptyView()
-                            }
-                            .hidden()
-                        )
-                    }
-                    .navigationBarHidden(true)
+        }
+        .alert(isPresented: $showConfirmation) {
+            Alert(
+                title: Text("Password Reset"),
+                message: Text("A password Reset link has been sent to your email."),
+                dismissButton: .default(Text("OK")) {
+                    presentationMode.wrappedValue.dismiss()
+                    showConfirmation = false // Reset the confirmation state
+                }
+            )
+        }
+        .navigationBarHidden(true)
+    }
+    func sendResetPasswordLink(){
+        Auth.auth().sendPasswordReset(withEmail: email) {(error) in
+            if let error = error{
+                print("Password Reset Error")
+            }
+        }
     }
 }
 

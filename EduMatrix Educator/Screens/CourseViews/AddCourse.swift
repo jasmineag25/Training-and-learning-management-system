@@ -1,6 +1,8 @@
 
 import SwiftUI
+import FirebaseFirestore
 import UniformTypeIdentifiers
+import FirebaseAuth
 
 struct CourseDetailsView: View {
     @Binding var courses: [Course]
@@ -14,7 +16,7 @@ struct CourseDetailsView: View {
     @State private var selectedURL: URL?
     @State private var isShowingImagePicker = false
     @State private var showAlert = false
-    @State private var selectedKeywords: [String] = []
+    @State private var selectedKeywords: String = "Select Keywords"
     @State private var videos: [Video] = []
     @State private var notes: [Note] = []
     @Environment(\.presentationMode) var presentationMode
@@ -31,11 +33,17 @@ struct CourseDetailsView: View {
                 CourseTextField(title: "Course Duration", text: $courseDuration)
                 NavigationLinkButtons(videos: $videos, notes: $notes)
                 CoursePicker(title: "Course Language", selection: $courseLanguage, options: languages)
-                CourseKeywordPicker(title: "Course Keywords", selectedKeywords: $selectedKeywords, options: allKeywords)
+                CoursePicker(title: "Course Keywords", selection: $selectedKeywords, options: allKeywords)
                 CourseTextField(title: "Course Price", text: $coursePrice, keyboardType: .decimalPad)
                 CoursePicker(title: "Category", selection: $category, options: categories)
                 CourseImagePicker(selectedImage: $selectedImage, isShowingImagePicker: $isShowingImagePicker)
-                SubmitButton(showAlert: $showAlert, action: onSendRequest)
+                SubmitButton(showAlert: $showAlert, action: {
+                    guard let email = Auth.auth().currentUser?.email else { return }
+                    submitCourseRequest(name: courseName, description: courseDescription, duration: courseDuration, price: coursePrice, category: category, keywords: selectedKeywords, image: selectedImage! , language: courseLanguage,email: email) {success in
+                        print(success)
+                    }
+                    showAlert = true
+                })
             }
             .padding()
         }
@@ -61,25 +69,25 @@ struct CourseDetailsView: View {
             )
         }
     }
-
-    func onSendRequest() {
-        let course = Course(
-            id: UUID(),
-            name: courseName,
-            description: courseDescription,
-            duration: courseDuration,
-            language: courseLanguage,
-            price: coursePrice,
-            category: category,
-            keywords: selectedKeywords,
-            imageUrl: selectedURL,
-            videos: videos,
-            notes: notes
-        )
-        self.courses.append(course)
-        showAlert = true
-        print("Course submitted: \(course)")
-    }
+//
+//    func onSendRequest() {
+//        let course = Course(
+//            id: UUID(),
+//            name: courseName,
+//            description: courseDescription,
+//            duration: courseDuration,
+//            language: courseLanguage,
+//            price: coursePrice,
+//            category: category,
+//            keywords: selectedKeywords,
+//            imageUrl: selectedURL,
+//            videos: videos,
+//            notes: notes
+//        )
+//        self.courses.append(course)
+//        showAlert = true
+//        print("Course submitted: \(course)")
+//    }
 
     func clearFields() {
         courseName = ""

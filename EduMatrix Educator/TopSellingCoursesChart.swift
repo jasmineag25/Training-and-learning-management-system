@@ -48,6 +48,7 @@ struct ChartLegendItem: View {
             Text(text)
                 .font(.subheadline)
         }
+        
     }
 }
 
@@ -56,3 +57,5 @@ struct TopSellingCoursesChart_Previews: PreviewProvider {
         TopSellingCoursesChart()
     }
 }
+
+

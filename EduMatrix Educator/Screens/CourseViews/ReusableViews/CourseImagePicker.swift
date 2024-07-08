@@ -14,14 +14,13 @@ struct CourseImagePicker: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Course Image")
-                .font(.headline)
-            HStack {
+//            Text("Image")
+//                .font(.headline)
+            VStack {
                 if let selectedImage = selectedImage {
                     Image(uiImage: selectedImage)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 100, height: 100)
+                        .frame(maxWidth:.infinity, maxHeight: 200)
                         .clipped()
                         .cornerRadius(8)
                 } else {
@@ -33,7 +32,8 @@ struct CourseImagePicker: View {
                 }) {
                     Text("Upload")
                         .foregroundColor(.white)
-                        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                        .padding()
+                        .frame(maxWidth: .infinity)
                         .background(Color.blue)
                         .cornerRadius(8)
                 }

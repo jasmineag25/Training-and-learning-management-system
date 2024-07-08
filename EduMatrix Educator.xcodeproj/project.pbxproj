@@ -12,6 +12,7 @@
 		A928210E2C37205600D137B6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A98806D72C367945005D2F17 /* FirebaseFirestore */; };
 		A928210F2C37205600D137B6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A98806D92C367945005D2F17 /* FirebaseStorage */; };
 		A92821112C3720B600D137B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A92821102C3720B600D137B6 /* GoogleService-Info.plist */; };
+		A928213F2C398CF100D137B6 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = A928213E2C398CF100D137B6 /* Services.swift */; };
 		A988069E2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */; };
 		A98806A02C3568CF005D2F17 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988069F2C3568CF005D2F17 /* LoginView.swift */; };
 		A98806A22C3568D0005D2F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98806A12C3568D0005D2F17 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		A92821102C3720B600D137B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A928213E2C398CF100D137B6 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		A988069A2C3568CF005D2F17 /* EduMatrix Educator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EduMatrix Educator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduMatrix_EducatorApp.swift; sourceTree = "<group>"; };
 		A988069F2C3568CF005D2F17 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				C54B0A8A2C37ABDE00A16234 /* ContentView.swift */,
 				C54B0A8C2C37AD3900A16234 /* HomeView.swift */,
 				C55FD53E2C3814F0007D9C59 /* SearchBar.swift */,
+				A928213E2C398CF100D137B6 /* Services.swift */,
 				C55FD5402C38153C007D9C59 /* TopSellingCoursesChart.swift */,
 				C55FD5422C381578007D9C59 /* CourseCard.swift */,
 			);
@@ -342,6 +345,7 @@
 				C54B0A8B2C37ABDE00A16234 /* ContentView.swift in Sources */,
 				C55FD54C2C39574F007D9C59 /* VideoPicker.swift in Sources */,
 				C54B0A992C37C7D100A16234 /* OTPView.swift in Sources */,
+				A928213F2C398CF100D137B6 /* Services.swift in Sources */,
 				C55FD55B2C3971D7007D9C59 /* ViewRouter.swift in Sources */,
 				C54B0A892C37A9EF00A16234 /* Course.swift in Sources */,
 				C55FD54A2C3956AF007D9C59 /* NotePicker.swift in Sources */,
