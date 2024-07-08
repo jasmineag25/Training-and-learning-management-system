@@ -79,9 +79,10 @@ struct LoginView: View {
                 
                 // Login button
                 Button(action: {
-                    // Action for login
-                    checkLoginCredentials(email: email, password: password, expectedRole: "educator")
-                    
+//                     Action for login
+//                    checkLoginCredentials(email: email, password: password, expectedRole: "educator")
+                    isSignIn = true
+
                     
                 }) {
                    

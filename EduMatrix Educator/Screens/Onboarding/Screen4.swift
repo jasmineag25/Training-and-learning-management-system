@@ -42,6 +42,7 @@ struct OnboardingScreen4: View {
                 }
                 Button(action: {
                     // Action for "Become an Educator"
+                    viewRouter.currentPage = .PersonalDetailsForm
                 }) {
                     Text("Become an Educator")
                         .frame(maxWidth: .infinity)

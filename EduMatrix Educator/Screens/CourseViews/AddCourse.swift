@@ -78,6 +78,7 @@ struct CourseDetailsView: View {
         )
         self.courses.append(course)
         showAlert = true
+        print("Course submitted: \(course)")
     }
 
     func clearFields() {

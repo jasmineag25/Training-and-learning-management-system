@@ -38,6 +38,9 @@ struct EduMatrix_EducatorApp: App {
                         case .contentView:
                             ContentView()
                                 .environmentObject(viewRouter)
+                        case .PersonalDetailsForm:
+                            PersonalDetailsForm()
+                                .environmentObject(viewRouter)
                         }
                     } else {
                         OnboardingView()
