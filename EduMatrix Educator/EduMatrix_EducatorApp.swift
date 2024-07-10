@@ -16,6 +16,7 @@ struct EduMatrix_EducatorApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var viewRouter = ViewRouter()
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
+    //@AppStorage("isDarkMode") private var isDarkMode = false
     
     var body: some Scene {
         WindowGroup {
@@ -23,28 +24,36 @@ struct EduMatrix_EducatorApp: App {
                 if Auth.auth().currentUser != nil {
                     ContentView()
                         .environmentObject(viewRouter)
+                        //.preferredColorScheme(isDarkMode ? .dark : .light)
                 } else {
                     if hasSeenOnboarding {
                         switch viewRouter.currentPage {
                         case .onboardingView:
                             OnboardingView()
                                 .environmentObject(viewRouter)
+                               // .preferredColorScheme(isDarkMode ? .dark : .light)
                                 .onAppear {
                                     hasSeenOnboarding = true
                                 }
                         case .loginView:
                             LoginView()
+                               // .preferredColorScheme(isDarkMode ? .dark : .light)
                                 .environmentObject(viewRouter)
                         case .contentView:
                             ContentView()
                                 .environmentObject(viewRouter)
+                                //.preferredColorScheme(isDarkMode ? .dark : .light)
                         case .PersonalDetailsForm:
                             PersonalDetailsForm()
+                                .environmentObject(viewRouter)
+                        case .onboardingScreen4:
+                            OnboardingScreen4()
                                 .environmentObject(viewRouter)
                         }
                     } else {
                         OnboardingView()
                             .environmentObject(viewRouter)
+                           // .preferredColorScheme(isDarkMode ? .dark : .light)
                             .onAppear {
                                 hasSeenOnboarding = true
                             }

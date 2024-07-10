@@ -12,6 +12,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct ForgotPasswordView: View {
+    @AppStorage("isDarkMode") private var isDarkMode = false
     @State private var email: String = ""
     @State private var showConfirmation: Bool = false
     @State private var showError: Bool = false

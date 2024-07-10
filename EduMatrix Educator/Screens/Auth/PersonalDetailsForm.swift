@@ -18,6 +18,12 @@ struct PersonalDetailsForm: View {
     @State private var isShowingImagePicker = false
     
     @State private var showAlert = false
+    @State private var firstNameError = false
+    @State private var lastNameError = false
+    @State private var emailError = false
+    @State private var mobileError = false
+
+    @EnvironmentObject var viewRouter: ViewRouter
     @State private var alertMessage = ""
     
     //@State private var isShowingProfileImagePicker = false //Profile Image Picker
@@ -95,6 +101,11 @@ struct PersonalDetailsForm: View {
                     }
                     
                     TextField("E-Mail", text: $email)
+                        .onChange(of: email) { newEmail in
+                            emailError = !newEmail.isValidEmail
+                        }
+                        .foregroundColor(emailError ? .red : .primary)
+                        .textContentType(.emailAddress)
                         .autocapitalization(.none)
                         .onChange(of: email) { _ in validateEmail() }
                     if let error = emailError {
@@ -107,7 +118,7 @@ struct PersonalDetailsForm: View {
                         Text(error).foregroundColor(.red).font(.caption)
                     }
                 }
-                
+
                 Section(header: Text("Qualification")) {
                     Picker("Qualification", selection: $qualification) {
                         Text("High School").tag("High School")
@@ -125,7 +136,7 @@ struct PersonalDetailsForm: View {
                         Text("3 years").tag("3 years")
                         Text("4 years").tag("4 years")
                         Text("5 years").tag("5 years")
-                        Text("More than 5 years").tag("More than 5 years ")
+                        Text("More than 5 years").tag("More than 5 years")
                     }
                 }
                 
@@ -186,7 +197,7 @@ struct PersonalDetailsForm: View {
                         }
                     }
                 }
-                
+
                 Button(action: {
                     if validateForm() {
                         submitEducatorRequest(
