@@ -3,27 +3,109 @@ import FirebaseFirestore
 import FirebaseStorage
 
 struct PersonalDetailsForm: View {
-    @State private var name: String = ""
+    @State private var firstName: String = ""
+    @State private var middleName: String = ""
+    @State private var lastName: String = ""
     @State private var email: String = ""
     @State private var about: String = ""
-    @State private var aadharImage : UIImage?
+    @State private var aadharImage: UIImage? = nil
     @State private var mobileNumber: String = ""
     @State private var qualification: String = "Graduation"
     @State private var experience: String = "1 year"
-    @State private var subjectDomain: String = "Web Tech"
-    @State private var language: String = "English"
-    @State private var selectedImage: UIImage? = nil
+    @State private var subjectDomain: [String] = ["Web Tech"]
+    @State private var language: [String] = ["English"]
+    //@State private var profileImage: UIImage? = nil
     @State private var isShowingImagePicker = false
+    
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    
+    //@State private var isShowingProfileImagePicker = false //Profile Image Picker
+    @State private var isShowingAadharImagePicker = false //Aadhaar Image Picker
+    
+    @State private var isShowingActionSheet = false //Add state variable
+    @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary //Add state variable
+    
     @Environment(\.presentationMode) var presentationMode
-
-
+    
+    // Validation States
+    @State private var firstNameError: String? = nil
+    @State private var middleNameError: String? = nil
+    @State private var lastNameError: String? = nil
+    @State private var emailError: String? = nil
+    @State private var mobileNumberError: String? = nil
+    @State private var aboutError: String? = nil
+    
     var body: some View {
         NavigationView {
             Form {
+                
+                /*
+                 
+                 // Profile Picture Section
+                 Section(header: Text("Profile Picture")) {
+                 HStack {
+                 Spacer()
+                 VStack {
+                 if let selectedImage = profileImage {
+                 Image(uiImage: selectedImage)
+                 .resizable()
+                 .aspectRatio(contentMode: .fill)
+                 .frame(width: 100, height: 100)
+                 .clipShape(Circle())
+                 .onTapGesture {
+                 isShowingActionSheet = true
+                 isShowingProfileImagePicker = true
+                 }
+                 } else {
+                 Image(systemName: "person.circle")
+                 .resizable()
+                 .aspectRatio(contentMode: .fill)
+                 .frame(width: 100, height: 100)
+                 .foregroundColor(.gray)
+                 .onTapGesture {
+                 isShowingActionSheet = true
+                 isShowingProfileImagePicker = true
+                 }
+                 }
+                 }
+                 Spacer()
+                 }
+                 .padding(.horizontal)
+                 }
+                 
+                 */
                 Section(header: Text("Personal Details")) {
-                    TextField("Name", text: $name)
+                    TextField("First Name", text: $firstName)
+                        .onChange(of: firstName) { _ in validateFirstName() }
+                    if let error = firstNameError {
+                        Text(error).foregroundColor(.red).font(.caption)
+                    }
+                    
+                    TextField("Middle Name (Optional)", text: $middleName)
+                        .onChange(of: middleName) { _ in validateMiddleName() } // Highlight: validation on change
+                    if let error = middleNameError { // Highlight: added error display for middle name
+                        Text(error).foregroundColor(.red).font(.caption)
+                    }
+                    
+                    TextField("Last Name (Optional)", text: $lastName)
+                        .onChange(of: lastName) { _ in validateLastName() } // Highlight: validation on change
+                    if let error = lastNameError { // Highlight: added error display for last name
+                        Text(error).foregroundColor(.red).font(.caption)
+                    }
+                    
                     TextField("E-Mail", text: $email)
+                        .autocapitalization(.none)
+                        .onChange(of: email) { _ in validateEmail() }
+                    if let error = emailError {
+                        Text(error).foregroundColor(.red).font(.caption)
+                    }
+                    
                     TextField("Mobile Number", text: $mobileNumber)
+                        .onChange(of: mobileNumber) { _ in validateMobileNumber() }
+                    if let error = mobileNumberError {
+                        Text(error).foregroundColor(.red).font(.caption)
+                    }
                 }
                 
                 Section(header: Text("Qualification")) {
@@ -35,7 +117,7 @@ struct PersonalDetailsForm: View {
                         Text("Other").tag("Other")
                     }
                 }
-
+                
                 Section(header: Text("Experience")) {
                     Picker("Experience", selection: $experience) {
                         Text("1 year").tag("1 year")
@@ -46,66 +128,299 @@ struct PersonalDetailsForm: View {
                         Text("More than 5 years").tag("More than 5 years ")
                     }
                 }
-
+                
                 Section(header: Text("Subjects/Domains")) {
-                    Picker("Subjects/Domains", selection: $subjectDomain) {
-                        Text("Web Tech").tag("Web Tech")
-                        Text("Mobile App Development").tag("Mobile App Development")
-                        Text("Data Science").tag("Data Science")
-                        Text("PCM").tag("PCM")
-                        Text("PCB").tag("PCB")
-                        Text("Other").tag("Other")
-                    }
+                    MultipleSelectionPicker(title: "Subjects/Domains",
+                                            selection: $subjectDomain,
+                                            options: [
+                                                "Web Tech",
+                                                "Mobile App Development",
+                                                "Data Science",
+                                                "PCM",
+                                                "PCB",
+                                                "Other"
+                                            ])
+                    Text("\(subjectDomain.joined(separator: ", "))")
                 }
-
+                
                 Section(header: Text("Languages")) {
-                    Picker("Languages", selection: $language) {
-                        Text("English").tag("English")
-                        Text("Hindi").tag("Hindi")
-                        Text("Spanish").tag("Spanish")
-                        Text("Other").tag("Other")
+                    MultipleSelectionPicker(title: "Languages",
+                                            selection: $language,
+                                            options: [
+                                                "English",
+                                                "Hindi",
+                                                "Spanish",
+                                                "Other"
+                                            ])
+                    Text("\(language.joined(separator: ", "))")
+                }
+                
+                Section(header: Text("More About Yourself")) {
+                    TextEditor(text: $about)
+                        .frame(minHeight: 100)
+                        .lineLimit(nil) // Highlight: word wrap enabled
+                        .onChange(of: about) { _ in validateAbout() }
+                    if let error = aboutError {
+                        Text(error).foregroundColor(.red).font(.caption)
                     }
                 }
-
-                Section(header: Text("More About Yourself")){
-                    TextField("Your Achievements, Your Awards etc. ", text: $about).frame(height: 150)
-                }
+                
+                // Aadhaar Image Section
                 Section(header: Text("Document Upload")) {
-                    CourseImagePicker(selectedImage: $selectedImage, isShowingImagePicker: $isShowingImagePicker)
+                    if let selectedAadharImage = aadharImage {
+                        Image(uiImage: selectedAadharImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 100)
+                            .clipped()
+                    } else {
+                        Text("No document")
+                    }
+                    
+                    if aadharImage == nil {
+                        Button(action: {
+                            isShowingActionSheet = true
+                            isShowingAadharImagePicker = true
+                        }) {
+                            Text("Upload")
+                        }
+                    }
                 }
                 
                 Button(action: {
-                    submitEducatorRequest(name: name, aadharImage: selectedImage!,profileImage: selectedImage!, email: email, mobileNumber: mobileNumber, qualification: qualification, experience: experience, subjectDomain: subjectDomain, language: language, about: about){ success in
-                        print(success)
-                        
+                    if validateForm() {
+                        submitEducatorRequest(
+                            firstName: firstName,
+                            middleName: middleName,
+                            lastName: lastName,
+                            aadharImage: aadharImage!,
+                            profileImage: aadharImage!,
+                            email: email,
+                            mobileNumber: mobileNumber,
+                            qualification: qualification,
+                            experience: experience,
+                            subjectDomain: subjectDomain,
+                            language: language,
+                            about: about
+                        ) { success in
+                            print(success)
+                            showAlert = true
+                        }
+                        presentationMode.wrappedValue.dismiss()
                     }
-                    presentationMode.wrappedValue.dismiss()
-                    
                 }) {
                     Text("Submit")
-                      .frame(maxWidth:.infinity)
-                      .padding()
-                      .background(Color.blue)
-                      .foregroundColor(.white)
-                      .cornerRadius(8)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .opacity(validateForm() ? 1.0 : 0.5)
+                        .disabled(!validateForm())
                 }
-                
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Confirmation"), message: Text("Request sent successfully"), dismissButton: .default(Text("Ok")){
+                        resetForm()
+                        presentationMode.wrappedValue.dismiss()
+                    })
+                }
             }
-           .sheet(isPresented: $isShowingImagePicker) {
-                ImagePickerView(image: $selectedImage)
+            .onAppear {
+                resetForm() // Call resetForm() when the view appears
             }
-           .navigationTitle("Personal Details")
-           
+            .actionSheet(isPresented: $isShowingActionSheet) {
+                ActionSheet(
+                    title: Text("Select Image"),
+                    buttons: [
+                        .default(Text("Camera")) {
+                            imageSource = .camera
+                            //                            if isShowingProfileImagePicker {
+                            //                                isShowingImagePicker = true
+                            //                            } else
+                            if isShowingAadharImagePicker {
+                                isShowingImagePicker = true
+                            }
+                        },
+                        .default(Text("Photo Library")) {
+                            imageSource = .photoLibrary
+                            //                            if isShowingProfileImagePicker {
+                            //                                isShowingImagePicker = true
+                            //                            } else
+                            if isShowingAadharImagePicker {
+                                isShowingImagePicker = true
+                            }
+                        },
+                        .cancel()
+                    ]
+                )
+            }
+            
+            
+            .sheet(isPresented: $isShowingImagePicker) {
+                //                if isShowingProfileImagePicker {
+                //                    ImagePickerView(image: $profileImage, sourceType: imageSource)
+                //                } else
+                if isShowingAadharImagePicker {
+                    ImagePickerView(image: $aadharImage, sourceType: imageSource)
+                }
+            }
+            .navigationTitle("Personal Details")
+        }
+    }
+    
+    // Validation Functions
+    private func validateFirstName() {
+        if firstName.isEmpty {
+            firstNameError = "First name is required"
+        } else if !isValidName(firstName) {
+            firstNameError = "First name must not contain numbers or special characters"
+        } else {
+            firstNameError = nil
+        }
+    }
+    
+    private func validateMiddleName() {
+        if !middleName.isEmpty && !isValidName(middleName) {
+            middleNameError = "Middle name must not contain numbers or special characters" // Highlight: validation message
+        } else {
+            middleNameError = nil
+        }
+    }
+    
+    private func validateLastName() {
+        if !lastName.isEmpty && !isValidName(lastName) {
+            lastNameError = "Last name must not contain numbers or special characters" // Highlight: validation message
+        } else {
+            lastNameError = nil
+        }
+    }
+    
+    private func validateEmail() {
+        if email.isEmpty {
+            emailError = "Email is required"
+        } else if !isValidEmail(email) {
+            emailError = "Email must be in the format 'example@example.com'"
+        } else {
+            emailError = nil
+        }
+    }
+    
+    private func validateMobileNumber() {
+        if mobileNumber.isEmpty {
+            mobileNumberError = "Mobile number is required"
+        } else if !isValidMobileNumber(mobileNumber) {
+            mobileNumberError = "Mobile number must be exactly 10 digits"
+        } else {
+            mobileNumberError = nil
+        }
+    }
+    
+    private func validateAbout() {
+        if about.trimmingCharacters(in: .whitespaces).isEmpty && !about.isEmpty {
+            aboutError = "Description cannot be only spaces"
+        } else {
+            aboutError = nil
+        }
+    }
+    
+    private func validateForm() -> Bool {
+        validateFirstName()
+        validateMiddleName()
+        validateLastName()
+        validateEmail()
+        validateMobileNumber()
+        validateAbout()
+        
+        return firstNameError == nil && middleNameError == nil && lastNameError == nil && emailError == nil && mobileNumberError == nil && aboutError == nil
+    }
+    
+    private func isValidName(_ name: String) -> Bool {
+        let nameRegEx = "^[a-zA-Z]+$"
+        let namePred = NSPredicate(format: "SELF MATCHES %@", nameRegEx)
+        return namePred.evaluate(with: name)
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
+    private func isValidMobileNumber(_ mobileNumber: String) -> Bool {
+        let mobileRegEx = "^[0-9]{10}$"
+        let mobilePred = NSPredicate(format: "SELF MATCHES %@", mobileRegEx)
+        return mobilePred.evaluate(with: mobileNumber)
+    }
+    
+    private func resetForm() {
+        firstName = ""
+        middleName = ""
+        lastName = ""
+        email = ""
+        about = ""
+        aadharImage = nil
+        mobileNumber = ""
+        qualification = "Graduation"
+        experience = "1 year"
+        subjectDomain = ["Web Tech"]
+        language = ["English"]
+        isShowingImagePicker = false
+        isShowingActionSheet = false
+        isShowingAadharImagePicker = false
+        showAlert = false
+        
+        // Reset validation errors
+        firstNameError = nil
+        middleNameError = nil
+        lastNameError = nil
+        emailError = nil
+        mobileNumberError = nil
+        aboutError = nil
+    }
+}
+
+struct MultipleSelectionPicker: View {
+    let title: String
+    @Binding var selection: [String]
+    let options: [String]
+
+    var body: some View {
+        Menu {
+            ForEach(options, id: \.self) { option in
+                Button(action: {
+                    if self.selection.contains(option) {
+                        self.selection.removeAll(where: { $0 == option })
+                    } else {
+                        self.selection.append(option)
+                    }
+                }) {
+                    HStack {
+                        Text(option)
+                        if self.selection.contains(option) {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            }
+        } label: {
+            HStack {
+                Text(title)
+                Spacer()
+                Text("Select")
+            }
         }
     }
 }
 
 struct ImagePickerView: UIViewControllerRepresentable {
     @Binding var image: UIImage?
+    var sourceType: UIImagePickerController.SourceType
 
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
+        picker.sourceType = sourceType
         return picker
     }
 
@@ -124,7 +439,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
             self.parent = parent
         }
 
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let image = info[.originalImage] as? UIImage {
                 parent.image = image
             }
@@ -136,8 +451,9 @@ struct ImagePickerView: UIViewControllerRepresentable {
         }
     }
 }
+
 struct PersonalDetailsForm_Previews: PreviewProvider {
     static var previews: some View {
-       PersonalDetailsForm()
+        PersonalDetailsForm()
     }
 }
