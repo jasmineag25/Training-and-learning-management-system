@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ResetPasswordView: View {
+    // @AppStorage("isDarkMode") private var isDarkMode = false
     @State private var newPassword: String = ""
     @State private var confirmPassword: String = ""
     @State private var navigateToSuccessView: Bool = false

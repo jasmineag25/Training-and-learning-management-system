@@ -3,6 +3,7 @@ import FirebaseFirestore
 import FirebaseStorage
 
 struct PersonalDetailsForm: View {
+    //@AppStorage("isDarkMode") private var isDarkMode = false
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var about: String = ""

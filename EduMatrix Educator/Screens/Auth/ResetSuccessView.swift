@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ResetSuccessView: View {
     @State private var navigateToLoginView: Bool = false
+    //@AppStorage("isDarkMode") private var isDarkMode = false
    // @StateObject var userViewModel = UserViewModel()
 
     var body: some View {

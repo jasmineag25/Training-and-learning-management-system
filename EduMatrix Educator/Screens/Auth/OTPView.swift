@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct OTPView: View {
+    //@AppStorage("isDarkMode") private var isDarkMode = false
     @State private var otpFields: [String] = Array(repeating: "", count: 4) // State variable to hold user-entered OTP digits
     @State private var showAlert: Bool = false // State variable to control alert presentation
     @State private var isOTPVerified: Bool = false // State variable to track OTP verification status
