@@ -18,10 +18,10 @@ struct PersonalDetailsForm: View {
     @State private var isShowingImagePicker = false
     
     @State private var showAlert = false
-    @State private var firstNameError = false
-    @State private var lastNameError = false
-    @State private var emailError = false
-    @State private var mobileError = false
+    //@State private var firstNameError = false
+    //@State private var lastNameError = false
+    //@State private var emailError = false
+    //@State private var mobileError = false
 
     @EnvironmentObject var viewRouter: ViewRouter
     @State private var alertMessage = ""
@@ -101,16 +101,11 @@ struct PersonalDetailsForm: View {
                     }
                     
                     TextField("E-Mail", text: $email)
-                        .onChange(of: email) { newEmail in
-                            emailError = !newEmail.isValidEmail
-                        }
-                        .foregroundColor(emailError ? .red : .primary)
-                        .textContentType(.emailAddress)
-                        .autocapitalization(.none)
-                        .onChange(of: email) { _ in validateEmail() }
-                    if let error = emailError {
-                        Text(error).foregroundColor(.red).font(.caption)
-                    }
+                                            .autocapitalization(.none)
+                                            .onChange(of: email) { _ in validateEmail() }
+                                        if let error = emailError {
+                                            Text(error).foregroundColor(.red).font(.caption)
+                                        }
                     
                     TextField("Mobile Number", text: $mobileNumber)
                         .onChange(of: mobileNumber) { _ in validateMobileNumber() }
