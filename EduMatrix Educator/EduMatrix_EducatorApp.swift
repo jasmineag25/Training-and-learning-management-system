@@ -46,7 +46,9 @@ struct EduMatrix_EducatorApp: App {
                         case .PersonalDetailsForm:
                             PersonalDetailsForm()
                                 .environmentObject(viewRouter)
-                               // .preferredColorScheme(isDarkMode ? .dark : .light)
+                        case .onboardingScreen4:
+                            OnboardingScreen4()
+                                .environmentObject(viewRouter)
                         }
                     } else {
                         OnboardingView()

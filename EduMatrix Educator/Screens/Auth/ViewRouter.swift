@@ -17,4 +17,5 @@ enum Page {
     case loginView
     case contentView
     case PersonalDetailsForm
+    case onboardingScreen4
 }
