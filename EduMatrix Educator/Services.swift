@@ -154,6 +154,7 @@ func submitCourseRequest(name: String, description: String, duration: String, pr
             let dispatchGroup = DispatchGroup()
             
             for video in videos {
+                print(video)
                 dispatchGroup.enter()
                 let videoRef = storageRef1.child(video.id.uuidString)
                 videoRef.putFile(from: video.videoURL, metadata: nil) { metadata, error in
