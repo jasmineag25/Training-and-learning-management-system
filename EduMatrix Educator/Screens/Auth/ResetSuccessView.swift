@@ -2,7 +2,7 @@
 //  ResetSuccessView.swift
 //  EduMatrix Educator
 //
-//  Created by Shahiyan Khan on 05/07/24.
+//  Created by Madhav Verma on 05/07/24.
 //
 
 import SwiftUI

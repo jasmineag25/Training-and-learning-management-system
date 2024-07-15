@@ -48,15 +48,21 @@
 import SwiftUI
 
 struct VideoUploadView: View {
+//    @State private var newVideo : Video?
     @Binding var videos: [Video]
     @State private var videoTitle: String = ""
     @State private var selectedVideoURL: URL?
     @State private var isShowingVideoPicker = false
+    @State private var title : String = ""
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         VStack {
-            CourseTextField(title: "Video Title", text: $videoTitle)
+            ScrollView {
+                ForEach(videos.indices, id: \.self) { index in
+                   courseVideo(video: $videos[index])
+               }
+            }
             Button(action: {
                 isShowingVideoPicker = true
             }) {
@@ -68,38 +74,34 @@ struct VideoUploadView: View {
                     .frame(maxWidth: .infinity)
             }
             .padding()
-            if let selectedVideoURL = selectedVideoURL {
-                Text("Selected Video: \(selectedVideoURL.lastPathComponent)")
-            }
+//            if let selectedVideoURL = selectedVideoURL {
+//                Text("Selected Video: \(selectedVideoURL.lastPathComponent)")
+//            }
         }
         .navigationBarItems(trailing: Button("Done") {
-            if let selectedVideoURL = selectedVideoURL, !videoTitle.isEmpty {
-                let video = Video(id: UUID(), title: videoTitle, url: selectedVideoURL)
-                videos.append(video)
-            }
+            
             presentationMode.wrappedValue.dismiss()
         })
         .sheet(isPresented: $isShowingVideoPicker) {
-            VideoPicker(selectedURL: $selectedVideoURL, isPresented: $isShowingVideoPicker)
+            VideoPicker(videos: $videos , selectedURL: $selectedVideoURL, isPresented: $isShowingVideoPicker)
         }
-        .padding()
+       
     }
 }
 
-struct VideoUploadView_Previews: PreviewProvider {
-    struct Wrapper: View {
-        @State private var videos: [Video] = []
-
-        var body: some View {
-            NavigationView {
-                VideoUploadView(videos: $videos)
-            }
-        }
-    }
-
-    static var previews: some View {
-        Wrapper()
-    }
-}
-
-
+//struct VideoUploadView_Previews: PreviewProvider {
+//    struct Wrapper: View {
+//        @State private var videos: [Video] = []
+//
+//        var body: some View {
+//            NavigationView {
+//                VideoUploadView(videos: $videos)
+//            }
+//        }
+//    }
+//
+//    static var previews: some View {
+//        Wrapper()
+//    }
+//}
+//

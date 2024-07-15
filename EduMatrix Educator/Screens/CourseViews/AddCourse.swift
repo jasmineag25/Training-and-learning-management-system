@@ -39,7 +39,7 @@ struct CourseDetailsView: View {
                 CourseImagePicker(selectedImage: $selectedImage, isShowingImagePicker: $isShowingImagePicker)
                 SubmitButton(showAlert: $showAlert, action: {
                     guard let email = Auth.auth().currentUser?.email else { return }
-                    submitCourseRequest(name: courseName, description: courseDescription, duration: courseDuration, price: coursePrice, category: category, keywords: selectedKeywords, image: selectedImage! , language: courseLanguage,email: email) {success in
+                    submitCourseRequest(name: courseName, description: courseDescription, duration: courseDuration, price: coursePrice, category: category, keywords: selectedKeywords, image: selectedImage! , language: courseLanguage,email: email, videos: videos) {success in
                         print(success)
                     }
                     showAlert = true
@@ -69,26 +69,7 @@ struct CourseDetailsView: View {
             )
         }
     }
-//
-//    func onSendRequest() {
-//        let course = Course(
-//            id: UUID(),
-//            name: courseName,
-//            description: courseDescription,
-//            duration: courseDuration,
-//            language: courseLanguage,
-//            price: coursePrice,
-//            category: category,
-//            keywords: selectedKeywords,
-//            imageUrl: selectedURL,
-//            videos: videos,
-//            notes: notes
-//        )
-//        self.courses.append(course)
-//        showAlert = true
-//        print("Course submitted: \(course)")
-//    }
-
+    
     func clearFields() {
         courseName = ""
         courseDescription = ""
@@ -100,5 +81,21 @@ struct CourseDetailsView: View {
         selectedKeywords.removeAll()
         videos.removeAll()
         notes.removeAll()
+    }
+}
+
+struct CourseDetailsView_Previews: PreviewProvider {
+    struct Wrapper: View {
+        @State private var course: [Course] = []
+
+        var body: some View {
+            NavigationView {
+                CourseDetailsView(courses: $course)
+            }
+        }
+    }
+
+    static var previews: some View {
+        Wrapper()
     }
 }

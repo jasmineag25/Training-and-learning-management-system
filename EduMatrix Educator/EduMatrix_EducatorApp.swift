@@ -23,7 +23,8 @@ struct EduMatrix_EducatorApp: App {
             VStack {
                 if Auth.auth().currentUser != nil {
                     ContentView()
-                        .environmentObject(viewRouter)
+//                    VideoUploadView1()
+//                        .environmentObject(viewRouter)
                         //.preferredColorScheme(isDarkMode ? .dark : .light)
                 } else {
                     if hasSeenOnboarding {

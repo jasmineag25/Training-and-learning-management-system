@@ -6,13 +6,24 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct LectureVideo: View {
+    var video : Video
+    @Binding var lectureTitle : String
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TextField("Enter Lecture Title", text: $lectureTitle)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding(.bottom)
+        
+        VideoPlayer(player: AVPlayer(url: video.videoURL))
+            .frame(height: 300)
+            .padding()
+        
     }
 }
 
-#Preview {
-    LectureVideo()
-}
+//#Preview {
+//    
+//    LectureVideo(videoTitle: <#Binding<String>#>)
+//}

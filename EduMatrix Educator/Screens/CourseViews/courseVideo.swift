@@ -8,11 +8,37 @@
 import SwiftUI
 
 struct courseVideo: View {
+    @Binding var video: Video
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationLink(destination: LectureVideo(video: video , lectureTitle: $video.title)) {
+                HStack {
+//                    if let videoURL = video?.videoURL , let image = UIImage(contentsOfFile: videoURL.) {
+//                        Image(uiImage: image)
+//                    }
+//                    Spacer()
+                    Text(video.title)
+                        .foregroundColor(.black)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                }
+            }
+            .padding(.vertical)
     }
+        
 }
 
-#Preview {
-    courseVideo()
-}
+//struct courseVideo_Previews: PreviewProvider {
+//    struct Wrapper: View {
+//
+//        var body: some View {
+//            NavigationView {
+//                courseVideo()
+//            }
+//        }
+//    }
+//
+//    static var previews: some View {
+//        Wrapper()
+//    }
+//}

@@ -17,6 +17,11 @@
 		A98806A02C3568CF005D2F17 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988069F2C3568CF005D2F17 /* LoginView.swift */; };
 		A98806A22C3568D0005D2F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98806A12C3568D0005D2F17 /* Assets.xcassets */; };
 		A98806A52C3568D0005D2F17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98806A42C3568D0005D2F17 /* Preview Assets.xcassets */; };
+		A99212E72C444E75001BD986 /* LectureVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99212E62C444E75001BD986 /* LectureVideo.swift */; };
+		A99985E02C4272450056D68B /* a.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99985DF2C4272450056D68B /* a.swift */; };
+		A99985E22C4272530056D68B /* b.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99985E12C4272530056D68B /* b.swift */; };
+		A99985E42C4275420056D68B /* c.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99985E32C4275420056D68B /* c.swift */; };
+		A99985E92C4316170056D68B /* courseVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99985E82C4316170056D68B /* courseVideo.swift */; };
 		C54B0A892C37A9EF00A16234 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B0A882C37A9EF00A16234 /* Course.swift */; };
 		C54B0A8B2C37ABDE00A16234 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B0A8A2C37ABDE00A16234 /* ContentView.swift */; };
 		C54B0A8D2C37AD3900A16234 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B0A8C2C37AD3900A16234 /* HomeView.swift */; };
@@ -61,6 +66,12 @@
 		A988069F2C3568CF005D2F17 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A98806A12C3568D0005D2F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A98806A42C3568D0005D2F17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A99212E62C444E75001BD986 /* LectureVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureVideo.swift; sourceTree = "<group>"; };
+		A99985DF2C4272450056D68B /* a.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = a.swift; sourceTree = "<group>"; };
+		A99985E12C4272530056D68B /* b.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = b.swift; sourceTree = "<group>"; };
+		A99985E32C4275420056D68B /* c.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = c.swift; sourceTree = "<group>"; };
+		A99985E52C42D79A0056D68B /* sample.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.mp4; sourceTree = "<group>"; };
+		A99985E82C4316170056D68B /* courseVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseVideo.swift; sourceTree = "<group>"; };
 		C54B0A882C37A9EF00A16234 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C54B0A8A2C37ABDE00A16234 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C54B0A8C2C37AD3900A16234 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -136,9 +147,13 @@
 				C54B0A872C37A9B800A16234 /* Model */,
 				A92821102C3720B600D137B6 /* GoogleService-Info.plist */,
 				A988069D2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift */,
+				A99985E52C42D79A0056D68B /* sample.mp4 */,
 				A98806A12C3568D0005D2F17 /* Assets.xcassets */,
 				A98806A32C3568D0005D2F17 /* Preview Content */,
 				C54B0A8A2C37ABDE00A16234 /* ContentView.swift */,
+				A99985DF2C4272450056D68B /* a.swift */,
+				A99985E32C4275420056D68B /* c.swift */,
+				A99985E12C4272530056D68B /* b.swift */,
 				C54B0A8C2C37AD3900A16234 /* HomeView.swift */,
 				C55FD53E2C3814F0007D9C59 /* SearchBar.swift */,
 				A928213E2C398CF100D137B6 /* Services.swift */,
@@ -172,6 +187,8 @@
 				C55FD5322C37E6C5007D9C59 /* AddCourse.swift */,
 				C54B0A8E2C37AF4800A16234 /* CourseView.swift */,
 				C55FD5342C37E6FD007D9C59 /* VideoUploadView.swift */,
+				A99985E82C4316170056D68B /* courseVideo.swift */,
+				A99212E62C444E75001BD986 /* LectureVideo.swift */,
 				C55FD5362C37E759007D9C59 /* NoteUploadView.swift */,
 				C55FD5382C37E777007D9C59 /* QuizUploadView.swift */,
 				C55FD53A2C37E7BA007D9C59 /* FileType.swift */,
@@ -330,7 +347,9 @@
 				C54B0A8D2C37AD3900A16234 /* HomeView.swift in Sources */,
 				C55FD5692C39D32F007D9C59 /* Colors.swift in Sources */,
 				C55FD54F2C395A40007D9C59 /* CourseTextFieldView.swift in Sources */,
+				A99985E02C4272450056D68B /* a.swift in Sources */,
 				C54B0A8F2C37AF4800A16234 /* CourseView.swift in Sources */,
+				A99985E42C4275420056D68B /* c.swift in Sources */,
 				C54B0A972C37C73600A16234 /* ForgotPasswordView.swift in Sources */,
 				C55FD5482C395678007D9C59 /* ImagePicker.swift in Sources */,
 				C55FD5392C37E777007D9C59 /* QuizUploadView.swift in Sources */,
@@ -353,10 +372,13 @@
 				C55FD53B2C37E7BA007D9C59 /* FileType.swift in Sources */,
 				C55FD5432C381578007D9C59 /* CourseCard.swift in Sources */,
 				A988069E2C3568CF005D2F17 /* EduMatrix_EducatorApp.swift in Sources */,
+				A99212E72C444E75001BD986 /* LectureVideo.swift in Sources */,
 				C55FD5412C38153C007D9C59 /* TopSellingCoursesChart.swift in Sources */,
 				C55FD5592C395BB2007D9C59 /* NavigationLinkButtons.swift in Sources */,
 				C55FD5532C395B4B007D9C59 /* CourseKeywordPickerView.swift in Sources */,
 				C55FD5372C37E759007D9C59 /* NoteUploadView.swift in Sources */,
+				A99985E92C4316170056D68B /* courseVideo.swift in Sources */,
+				A99985E22C4272530056D68B /* b.swift in Sources */,
 				C55FD5602C39CF75007D9C59 /* Screen2.swift in Sources */,
 				C54B0A9D2C37C94C00A16234 /* ResetSuccessView.swift in Sources */,
 				C55FD55E2C39CF69007D9C59 /* Screen1.swift in Sources */,
