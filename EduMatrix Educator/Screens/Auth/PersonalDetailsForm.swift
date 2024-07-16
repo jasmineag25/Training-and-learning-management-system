@@ -10,25 +10,28 @@ struct PersonalDetailsForm: View {
     @State private var about: String = ""
     @State private var aadharImage: UIImage? = nil
     @State private var mobileNumber: String = ""
-    @State private var qualification: String = "Graduation"
+    @State private var qualification: String = "Not Selected"
     @State private var experience: String = "1 year"
-    @State private var subjectDomain: [String] = ["Web Tech"]
-    @State private var language: [String] = ["English"]
-    //@State private var profileImage: UIImage? = nil
+    @State private var subjectDomain: [String] = []
+    @State private var language: [String] = []
+//    @State private var profileImage: UIImage? = UIImage(systemName: "person.circle")
     @State private var isShowingImagePicker = false
+    @State private var profileImage: UIImage? = UIImage(systemName: "person.circle")
+
+    @State private var selectedURL: URL?
     
     @State private var showAlert = false
     //@State private var firstNameError = false
     //@State private var lastNameError = false
     //@State private var emailError = false
     //@State private var mobileError = false
-
+    
     @EnvironmentObject var viewRouter: ViewRouter
     @State private var alertMessage = ""
     
-    //@State private var isShowingProfileImagePicker = false //Profile Image Picker
+    @State private var isShowingProfileImagePicker = false //Profile Image Picker
     @State private var isShowingAadharImagePicker = false //Aadhaar Image Picker
-    
+    @State private var isprofileImage : Bool = false
     @State private var isShowingActionSheet = false //Add state variable
     @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary //Add state variable
     
@@ -45,42 +48,23 @@ struct PersonalDetailsForm: View {
     var body: some View {
         NavigationView {
             Form {
-                
-                /*
-                 
-                 // Profile Picture Section
-                 Section(header: Text("Profile Picture")) {
-                 HStack {
-                 Spacer()
-                 VStack {
-                 if let selectedImage = profileImage {
-                 Image(uiImage: selectedImage)
-                 .resizable()
-                 .aspectRatio(contentMode: .fill)
-                 .frame(width: 100, height: 100)
-                 .clipShape(Circle())
-                 .onTapGesture {
-                 isShowingActionSheet = true
-                 isShowingProfileImagePicker = true
-                 }
-                 } else {
-                 Image(systemName: "person.circle")
-                 .resizable()
-                 .aspectRatio(contentMode: .fill)
-                 .frame(width: 100, height: 100)
-                 .foregroundColor(.gray)
-                 .onTapGesture {
-                 isShowingActionSheet = true
-                 isShowingProfileImagePicker = true
-                 }
-                 }
-                 }
-                 Spacer()
-                 }
-                 .padding(.horizontal)
-                 }
-                 
-                 */
+                Section(header: Text("Profile Picture")) {
+                    VStack {
+                        Image(uiImage: profileImage!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipShape(Circle())
+                            .frame(width: 100, height: 100) // Set a fixed size for the image
+                            .onTapGesture {
+                                isprofileImage = true
+                                isShowingActionSheet = true
+                            }
+                        
+                    }
+                    .frame(maxWidth: .infinity) // Center the content within the parent view
+                    .padding()
+                }
+
                 Section(header: Text("Personal Details")) {
                     TextField("First Name", text: $firstName)
                         .onChange(of: firstName) { _ in validateFirstName() }
@@ -101,11 +85,11 @@ struct PersonalDetailsForm: View {
                     }
                     
                     TextField("E-Mail", text: $email)
-                                            .autocapitalization(.none)
-                                            .onChange(of: email) { _ in validateEmail() }
-                                        if let error = emailError {
-                                            Text(error).foregroundColor(.red).font(.caption)
-                                        }
+                        .autocapitalization(.none)
+                        .onChange(of: email) { _ in validateEmail() }
+                    if let error = emailError {
+                        Text(error).foregroundColor(.red).font(.caption)
+                    }
                     
                     TextField("Mobile Number", text: $mobileNumber)
                         .onChange(of: mobileNumber) { _ in validateMobileNumber() }
@@ -113,7 +97,7 @@ struct PersonalDetailsForm: View {
                         Text(error).foregroundColor(.red).font(.caption)
                     }
                 }
-
+                
                 Section(header: Text("Qualification")) {
                     Picker("Qualification", selection: $qualification) {
                         Text("High School").tag("High School")
@@ -173,26 +157,33 @@ struct PersonalDetailsForm: View {
                 
                 // Aadhaar Image Section
                 Section(header: Text("Document Upload")) {
-                    if let selectedAadharImage = aadharImage {
-                        Image(uiImage: selectedAadharImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 100)
-                            .clipped()
-                    } else {
-                        Text("No document")
-                    }
-                    
-                    if aadharImage == nil {
-                        Button(action: {
-                            isShowingActionSheet = true
-                            isShowingAadharImagePicker = true
-                        }) {
-                            Text("Upload")
+                    HStack{
+                        if let selectedAadharImage = aadharImage {
+                            Image(uiImage: selectedAadharImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(height: 200)
+                                .clipped()
+                                .onTapGesture {
+                                    isprofileImage = false
+                                    isShowingActionSheet = true
+                                }
+                        } else {
+                            Text("No document")
+                        }
+                        
+                        Spacer()
+                        if aadharImage == nil {
+                            Button(action: {
+                                isprofileImage = false
+                                isShowingActionSheet = true
+                            }) {
+                                Image(systemName: "chevron.right")
+                            }
                         }
                     }
                 }
-
+                
                 Button(action: {
                     if validateForm() {
                         submitEducatorRequest(
@@ -249,19 +240,35 @@ struct PersonalDetailsForm: View {
                         },
                         .default(Text("Photo Library")) {
                             imageSource = .photoLibrary
-                            //                            if isShowingProfileImagePicker {
-                            //                                isShowingImagePicker = true
-                            //                            } else
-                            if isShowingAadharImagePicker {
-                                isShowingImagePicker = true
+                            if isprofileImage {
+                                isShowingProfileImagePicker = true
+                            } 
+                            else {
+                                isShowingAadharImagePicker = true
                             }
                         },
                         .cancel()
                     ]
                 )
             }
+            .sheet(isPresented: $isShowingProfileImagePicker) {
+                ImagePicker(selectedURL: $selectedURL, isPresented: $isShowingImagePicker, mediaTypes: ["public.image"])
+                    .onDisappear {
+                        if let selectedURL = selectedURL, let image = UIImage(contentsOfFile: selectedURL.path) {
+                            self.profileImage = image
+                        }
+                    }
+            }
             
-            
+            .sheet(isPresented: $isShowingAadharImagePicker) {
+                ImagePicker(selectedURL: $selectedURL, isPresented: $isShowingImagePicker, mediaTypes: ["public.image"])
+                    .onDisappear {
+                        if let selectedURL = selectedURL, let image = UIImage(contentsOfFile: selectedURL.path) {
+                            self.aadharImage = image
+                        }
+                    }
+            }
+
             .sheet(isPresented: $isShowingImagePicker) {
                 //                if isShowingProfileImagePicker {
                 //                    ImagePickerView(image: $profileImage, sourceType: imageSource)
@@ -389,7 +396,7 @@ struct MultipleSelectionPicker: View {
     let title: String
     @Binding var selection: [String]
     let options: [String]
-
+    
     var body: some View {
         Menu {
             ForEach(options, id: \.self) { option in
@@ -422,36 +429,36 @@ struct MultipleSelectionPicker: View {
 struct ImagePickerView: UIViewControllerRepresentable {
     @Binding var image: UIImage?
     var sourceType: UIImagePickerController.SourceType
-
+    
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
         picker.sourceType = sourceType
         return picker
     }
-
+    
     func updateUIViewController(_ uiView: UIImagePickerController, context: Context) {
         // Nothing to update
     }
-
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-
+    
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         let parent: ImagePickerView
-
+        
         init(_ parent: ImagePickerView) {
             self.parent = parent
         }
-
+        
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let image = info[.originalImage] as? UIImage {
                 parent.image = image
             }
             picker.dismiss(animated: true, completion: nil)
         }
-
+        
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             picker.dismiss(animated: true, completion: nil)
         }
