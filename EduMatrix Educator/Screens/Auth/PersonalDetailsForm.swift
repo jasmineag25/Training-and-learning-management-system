@@ -14,17 +14,11 @@ struct PersonalDetailsForm: View {
     @State private var experience: String = "1 year"
     @State private var subjectDomain: [String] = []
     @State private var language: [String] = []
-//    @State private var profileImage: UIImage? = UIImage(systemName: "person.circle")
-    @State private var isShowingImagePicker = false
     @State private var profileImage: UIImage? = UIImage(systemName: "person.circle")
 
     @State private var selectedURL: URL?
     
     @State private var showAlert = false
-    //@State private var firstNameError = false
-    //@State private var lastNameError = false
-    //@State private var emailError = false
-    //@State private var mobileError = false
     
     @EnvironmentObject var viewRouter: ViewRouter
     @State private var alertMessage = ""
@@ -231,19 +225,17 @@ struct PersonalDetailsForm: View {
                     buttons: [
                         .default(Text("Camera")) {
                             imageSource = .camera
-                            //                            if isShowingProfileImagePicker {
-                            //                                isShowingImagePicker = true
-                            //                            } else
-                            if isShowingAadharImagePicker {
-                                isShowingImagePicker = true
+                            if isprofileImage {
+                                isShowingProfileImagePicker = true
+                            } else {
+                                isShowingAadharImagePicker = true
                             }
                         },
                         .default(Text("Photo Library")) {
                             imageSource = .photoLibrary
                             if isprofileImage {
                                 isShowingProfileImagePicker = true
-                            } 
-                            else {
+                            } else {
                                 isShowingAadharImagePicker = true
                             }
                         },
@@ -252,30 +244,10 @@ struct PersonalDetailsForm: View {
                 )
             }
             .sheet(isPresented: $isShowingProfileImagePicker) {
-                ImagePicker(selectedURL: $selectedURL, isPresented: $isShowingImagePicker, mediaTypes: ["public.image"])
-                    .onDisappear {
-                        if let selectedURL = selectedURL, let image = UIImage(contentsOfFile: selectedURL.path) {
-                            self.profileImage = image
-                        }
-                    }
+                ImagePickerView(image: $profileImage, sourceType: imageSource)
             }
-            
             .sheet(isPresented: $isShowingAadharImagePicker) {
-                ImagePicker(selectedURL: $selectedURL, isPresented: $isShowingImagePicker, mediaTypes: ["public.image"])
-                    .onDisappear {
-                        if let selectedURL = selectedURL, let image = UIImage(contentsOfFile: selectedURL.path) {
-                            self.aadharImage = image
-                        }
-                    }
-            }
-
-            .sheet(isPresented: $isShowingImagePicker) {
-                //                if isShowingProfileImagePicker {
-                //                    ImagePickerView(image: $profileImage, sourceType: imageSource)
-                //                } else
-                if isShowingAadharImagePicker {
-                    ImagePickerView(image: $aadharImage, sourceType: imageSource)
-                }
+                ImagePickerView(image: $aadharImage, sourceType: imageSource)
             }
             .navigationTitle("Personal Details")
         }
@@ -377,9 +349,9 @@ struct PersonalDetailsForm: View {
         experience = "1 year"
         subjectDomain = ["Web Tech"]
         language = ["English"]
-        isShowingImagePicker = false
-        isShowingActionSheet = false
+        isShowingProfileImagePicker = false
         isShowingAadharImagePicker = false
+        isShowingActionSheet = false
         showAlert = false
         
         // Reset validation errors
