@@ -33,7 +33,7 @@ struct CoursePicker: View {
                     Image(systemName: "chevron.down")
                 }
                 .padding()
-                .background(selection == "Select Language" ? Color.gray.opacity(0.2) : Color.white)
+                .background(selection == "Select Language1" ? Color.gray.opacity(0.2) : Color.white )
                 .cornerRadius(8)
             }
             .padding(.bottom)

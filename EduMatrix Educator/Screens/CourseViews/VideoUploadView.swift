@@ -85,6 +85,7 @@ struct VideoUploadView: View {
         .sheet(isPresented: $isShowingVideoPicker) {
             VideoPicker(videos: $videos , selectedURL: $selectedVideoURL, isPresented: $isShowingVideoPicker)
         }
+        .padding()
        
     }
 }
