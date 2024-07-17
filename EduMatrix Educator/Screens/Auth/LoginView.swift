@@ -24,77 +24,6 @@ struct LoginView: View {
                     .scaledToFill()
                     .frame(height: 250)
                     .padding(.top, 30)
-                
-//                Text("Log in")
-//                    .font(.largeTitle)
-//                    .bold()
-//                
-//                // Email field
-//                TextField("Email address", text: $email)
-//                    .padding()
-//                    .background(Color(.secondarySystemBackground))
-//                    .cornerRadius(5.0)
-//                    .autocapitalization(.none)
-//                    .keyboardType(.emailAddress)
-//                    .overlay(
-//                        HStack {
-//                            Spacer()
-//                            if email.isEmpty {
-//                                Image(systemName: "")
-//                                    .padding()
-//                            }
-//                           else if isValidEmail(email) {
-//                                Image(systemName: "checkmark.circle.fill")
-//                                    .foregroundColor(.blue)
-//                                    .padding()
-//                            }
-//                            else{
-//                                Image(systemName: "xmark.circle.fill")
-//                                    .foregroundColor(.red)
-//                                    .padding()
-//                            }
-//                        }
-//                    )
-//                    .padding(.top, 20)
-//                    .padding()
-//                
-//                // Password field
-//                HStack {
-//                    if isPasswordVisible {
-//                        TextField("Password", text: $password)
-//                    } else {
-//                        SecureField("Password", text: $password)
-//                    }
-//                    Button(action: {
-//                        isPasswordVisible.toggle()
-//                    }) {
-//                        Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
-//                            .foregroundColor(.gray)
-//                    }
-//                }
-//                .padding()
-//                .background(Color(.secondarySystemBackground))
-//                .cornerRadius(5.0)
-//                .padding(.top, 10)
-//                
-//                // Forgot password
-//                HStack {
-//                    Spacer()
-//                    NavigationLink(destination: ForgotPasswordView()) {
-//                        Text("Forgot password?")
-//                            .font(.body)
-//                            .foregroundColor(.blue)
-//                    }
-//                }
-//                .padding(.top, 5)
-//                
-//                // Login button
-//                Button(action: {
-//                    // Action for login
-//                    checkLoginCredentials(email: email, password: password)
-//                    
-//                    
-//                }) {
                    
                     Text("Log in")
                         .font(.largeTitle)
@@ -238,13 +167,11 @@ struct LoginView: View {
                     Spacer(minLength: 50)
 
                     // Sign up link
-                    HStack {
-                        Text("Don’t have an account?")
-                        NavigationLink(destination: PersonalDetailsForm()) {
-                            Text("Sign up")
-                                .font(.body)
-                                .foregroundColor(.blue)
-                        }
+                    
+                    NavigationLink(destination: PersonalDetailsForm()) {
+                        Text("Become an Educator?")
+                            .font(.body)
+                            .foregroundColor(.blue)
                     }
                     .padding(.top, 20)
                 }
