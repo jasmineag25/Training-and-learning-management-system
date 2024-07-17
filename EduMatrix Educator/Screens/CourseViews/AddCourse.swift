@@ -46,7 +46,7 @@ struct CourseDetailsView: View {
                         }
                         else {
                             let data = snap?.data()
-                            let name = data!["name"] as! String
+                            let name = data!["fullName"] as! String
                             print(name)
                             submitCourseRequest(name: courseName, description: courseDescription, duration: courseDuration, price: coursePrice, category: category, keywords: selectedKeywords, image: selectedImage! , language: courseLanguage,email: email, educatorName: name, videos: videos) {success in
                                 print(success)
