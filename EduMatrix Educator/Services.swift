@@ -46,7 +46,7 @@ func submitEducatorRequest(firstName : String, middleName : String, lastName : S
                     }
                     let db = Firestore.firestore()
                     let userData: [String: Any] = [
-                        "name": firstName,
+                        "firstName": firstName,
                         "middleName": middleName,
                         "lastName": lastName,
                         "fullName" : firstName + " " + middleName + " " + lastName,
