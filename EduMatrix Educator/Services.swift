@@ -49,6 +49,7 @@ func submitEducatorRequest(firstName : String, middleName : String, lastName : S
                         "name": firstName,
                         "middleName": middleName,
                         "lastName": lastName,
+                        "fullName" : firstName + " " + middleName + " " + lastName,
                         "email": email,
                         "mobileNumber": mobileNumber,
                         "qualification": qualification,
