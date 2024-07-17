@@ -21,6 +21,7 @@ struct EduMatrix_EducatorApp: App {
     var body: some Scene {
         WindowGroup {
             VStack {
+                
                 if Auth.auth().currentUser != nil {
                     ContentView()
 //                    VideoUploadView1()

@@ -41,7 +41,7 @@ struct HomeView: View {
                do {
                    try Auth.auth().signOut()
                    // Navigate back to login or initial screen
-                   viewRouter.currentPage = .loginView // Adjust as per your ViewRouter setup
+                   viewRouter.currentPage = .loginView// Adjust as per your ViewRouter setup
                } catch let signOutError as NSError {
                    print("Error signing out: \(signOutError.localizedDescription)")
                }

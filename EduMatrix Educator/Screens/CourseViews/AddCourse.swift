@@ -39,8 +39,20 @@ struct CourseDetailsView: View {
                 CourseImagePicker(selectedImage: $selectedImage, isShowingImagePicker: $isShowingImagePicker)
                 SubmitButton(showAlert: $showAlert, action: {
                     guard let email = Auth.auth().currentUser?.email else { return }
-                    submitCourseRequest(name: courseName, description: courseDescription, duration: courseDuration, price: coursePrice, category: category, keywords: selectedKeywords, image: selectedImage! , language: courseLanguage,email: email, videos: videos) {success in
-                        print(success)
+                    let db = Firestore.firestore().collection("educators").document(email)
+                        db.getDocument(){ (snap, error) in
+                        if let error = error {
+                            print("Error getting documents: \(error.localizedDescription)")
+                        }
+                        else {
+                            let data = snap?.data()
+                            let name = data!["name"] as! String
+                            print(name)
+                            submitCourseRequest(name: courseName, description: courseDescription, duration: courseDuration, price: coursePrice, category: category, keywords: selectedKeywords, image: selectedImage! , language: courseLanguage,email: email, educatorName: name, videos: videos) {success in
+                                print(success)
+                            }
+
+                        }
                     }
                     showAlert = true
                 })
