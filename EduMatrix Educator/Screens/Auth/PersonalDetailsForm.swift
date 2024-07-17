@@ -11,7 +11,7 @@ struct PersonalDetailsForm: View {
     @State private var aadharImage: UIImage? = nil
     @State private var mobileNumber: String = ""
     @State private var qualification: String = "Not Selected"
-    @State private var experience: String = "1 year"
+    @State private var experience: String = "Select"
     @State private var subjectDomain: [String] = []
     @State private var language: [String] = []
     @State private var profileImage: UIImage? = UIImage(systemName: "person.circle")
@@ -38,6 +38,8 @@ struct PersonalDetailsForm: View {
     @State private var emailError: String? = nil
     @State private var mobileNumberError: String? = nil
     @State private var aboutError: String? = nil
+    @State private var profileImageError: String? = nil
+    @State private var aadharImageError: String? = nil
     
     var body: some View {
         NavigationView {
@@ -53,6 +55,9 @@ struct PersonalDetailsForm: View {
                                 isprofileImage = true
                                 isShowingActionSheet = true
                             }
+                        if let error = profileImageError {
+                            Text(error).foregroundColor(.red).font(.caption)
+                        }
                         
                     }
                     .frame(maxWidth: .infinity) // Center the content within the parent view
@@ -61,32 +66,32 @@ struct PersonalDetailsForm: View {
 
                 Section(header: Text("Personal Details")) {
                     TextField("First Name", text: $firstName)
-                        .onChange(of: firstName) { _ in validateFirstName() }
+                        .onChange(of: firstName) { validateFirstName() }
                     if let error = firstNameError {
                         Text(error).foregroundColor(.red).font(.caption)
                     }
                     
                     TextField("Middle Name (Optional)", text: $middleName)
-                        .onChange(of: middleName) { _ in validateMiddleName() } // Highlight: validation on change
+                        .onChange(of: middleName) { validateMiddleName() } // Highlight: validation on change
                     if let error = middleNameError { // Highlight: added error display for middle name
                         Text(error).foregroundColor(.red).font(.caption)
                     }
                     
                     TextField("Last Name (Optional)", text: $lastName)
-                        .onChange(of: lastName) { _ in validateLastName() } // Highlight: validation on change
+                        .onChange(of: lastName) { validateLastName() } // Highlight: validation on change
                     if let error = lastNameError { // Highlight: added error display for last name
                         Text(error).foregroundColor(.red).font(.caption)
                     }
                     
                     TextField("E-Mail", text: $email)
                         .autocapitalization(.none)
-                        .onChange(of: email) { _ in validateEmail() }
+                        .onChange(of: email) { validateEmail() }
                     if let error = emailError {
                         Text(error).foregroundColor(.red).font(.caption)
                     }
                     
                     TextField("Mobile Number", text: $mobileNumber)
-                        .onChange(of: mobileNumber) { _ in validateMobileNumber() }
+                        .onChange(of: mobileNumber) { validateMobileNumber() }
                     if let error = mobileNumberError {
                         Text(error).foregroundColor(.red).font(.caption)
                     }
@@ -104,7 +109,7 @@ struct PersonalDetailsForm: View {
                 
                 Section(header: Text("Experience")) {
                     Picker("Experience", selection: $experience) {
-                        Text("1 year").tag("1 year")
+                        Text("0-1 year").tag("0-1 year")
                         Text("2 years").tag("2 years")
                         Text("3 years").tag("3 years")
                         Text("4 years").tag("4 years")
@@ -113,37 +118,53 @@ struct PersonalDetailsForm: View {
                     }
                 }
                 
-                Section(header: Text("Subjects/Domains")) {
-                    MultipleSelectionPicker(title: "Subjects/Domains",
-                                            selection: $subjectDomain,
-                                            options: [
-                                                "Web Tech",
-                                                "Mobile App Development",
-                                                "Data Science",
-                                                "PCM",
-                                                "PCB",
-                                                "Other"
-                                            ])
-                    Text("\(subjectDomain.joined(separator: ", "))")
+                Section(header: Text("Domains")) {
+                    HStack{
+                        Text("Domains")
+                        Spacer()
+                        MultipleSelectionPicker(title: "",
+                                                selection: $subjectDomain,
+                                                options: [
+                                                    "Web Tech",
+                                                    "Mobile App Development",
+                                                    "Data Science",
+                                                    "PCM",
+                                                    "PCB",
+                                                    "Other"
+                                                ])
+                        .frame(width: 80)
+                    }
+                    if !subjectDomain.isEmpty {
+                        Text("\(subjectDomain.joined(separator: ", "))")
+                    }
                 }
                 
                 Section(header: Text("Languages")) {
-                    MultipleSelectionPicker(title: "Languages",
-                                            selection: $language,
-                                            options: [
-                                                "English",
-                                                "Hindi",
-                                                "Spanish",
-                                                "Other"
-                                            ])
-                    Text("\(language.joined(separator: ", "))")
+                    HStack{
+                        Text("Languages")
+                        Spacer()
+                        MultipleSelectionPicker(title: "",
+                                                selection: $language,
+                                                options: [
+                                                    "English",
+                                                    "Hindi",
+                                                    "Spanish",
+                                                    "Other"
+                                                ])
+                        .frame(width: 80)
+                    }
+                    if !language.isEmpty {
+                        Text("\(language.joined(separator: ", "))")
+                    }
                 }
                 
                 Section(header: Text("More About Yourself")) {
                     TextEditor(text: $about)
                         .frame(minHeight: 100)
                         .lineLimit(nil) // Highlight: word wrap enabled
-                        .onChange(of: about) { _ in validateAbout() }
+                        .onChange(of: about) {
+                            validateAbout()
+                        }
                     if let error = aboutError {
                         Text(error).foregroundColor(.red).font(.caption)
                     }
@@ -151,29 +172,34 @@ struct PersonalDetailsForm: View {
                 
                 // Aadhaar Image Section
                 Section(header: Text("Document Upload")) {
-                    HStack{
-                        if let selectedAadharImage = aadharImage {
-                            Image(uiImage: selectedAadharImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(height: 200)
-                                .clipped()
-                                .onTapGesture {
+                    VStack{
+                        HStack{
+                            if let selectedAadharImage = aadharImage {
+                                Image(uiImage: selectedAadharImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(height: 200)
+                                    .clipped()
+                                    .onTapGesture {
+                                        isprofileImage = false
+                                        isShowingActionSheet = true
+                                    }
+                            } else {
+                                Text("No document")
+                            }
+                            
+                            Spacer()
+                            if aadharImage == nil {
+                                Button(action: {
                                     isprofileImage = false
                                     isShowingActionSheet = true
+                                }) {
+                                    Image(systemName: "chevron.right")
                                 }
-                        } else {
-                            Text("No document")
-                        }
-                        
-                        Spacer()
-                        if aadharImage == nil {
-                            Button(action: {
-                                isprofileImage = false
-                                isShowingActionSheet = true
-                            }) {
-                                Image(systemName: "chevron.right")
                             }
+                        }
+                        if let error = aadharImageError {
+                            Text(error).foregroundColor(.red).font(.caption)
                         }
                     }
                 }
@@ -185,7 +211,7 @@ struct PersonalDetailsForm: View {
                             middleName: middleName,
                             lastName: lastName,
                             aadharImage: aadharImage!,
-                            profileImage: aadharImage!,
+                            profileImage: profileImage!,
                             email: email,
                             mobileNumber: mobileNumber,
                             qualification: qualification,
@@ -218,6 +244,12 @@ struct PersonalDetailsForm: View {
             }
             .onAppear {
                 resetForm() // Call resetForm() when the view appears
+            }
+            .onChange(of: aadharImage){
+                validateAadharImage()
+            }
+            .onChange(of: profileImage){
+                validateProfileImage()
             }
             .actionSheet(isPresented: $isShowingActionSheet) {
                 ActionSheet(
@@ -264,6 +296,8 @@ struct PersonalDetailsForm: View {
         }
     }
     
+    
+    
     private func validateMiddleName() {
         if !middleName.isEmpty && !isValidName(middleName) {
             middleNameError = "Middle name must not contain numbers or special characters" // Highlight: validation message
@@ -301,10 +335,31 @@ struct PersonalDetailsForm: View {
     }
     
     private func validateAbout() {
-        if about.trimmingCharacters(in: .whitespaces).isEmpty && !about.isEmpty {
+        if about.isEmpty{
+            aboutError = "About can't be Empty"
+        }
+        else if about.trimmingCharacters(in: .whitespaces).isEmpty{
             aboutError = "Description cannot be only spaces"
         } else {
             aboutError = nil
+        }
+    }
+    
+    private func validateAadharImage() {
+        if aadharImage == nil{
+            aadharImageError = "Upload any Government Issued ID"
+        }
+        else {
+            aadharImageError = nil
+        }
+    }
+    
+    private func validateProfileImage() {
+        if profileImage == UIImage(systemName: "person.circle"){
+            profileImageError = "Profile picture is required"
+        }
+        else {
+            profileImageError = nil
         }
     }
     
@@ -315,8 +370,10 @@ struct PersonalDetailsForm: View {
         validateEmail()
         validateMobileNumber()
         validateAbout()
+        validateAadharImage()
+        validateProfileImage()
         
-        return firstNameError == nil && middleNameError == nil && lastNameError == nil && emailError == nil && mobileNumberError == nil && aboutError == nil
+        return firstNameError == nil && middleNameError == nil && lastNameError == nil && emailError == nil && mobileNumberError == nil && aboutError == nil && aadharImageError == nil && profileImageError == nil
     }
     
     private func isValidName(_ name: String) -> Bool {
@@ -344,11 +401,12 @@ struct PersonalDetailsForm: View {
         email = ""
         about = ""
         aadharImage = nil
+        profileImage = UIImage(systemName: "person.circle")
         mobileNumber = ""
-        qualification = "Graduation"
-        experience = "1 year"
-        subjectDomain = ["Web Tech"]
-        language = ["English"]
+        qualification = "Not Selected"
+        experience = "Select"
+        subjectDomain = []
+        language = []
         isShowingProfileImagePicker = false
         isShowingAadharImagePicker = false
         isShowingActionSheet = false
@@ -361,6 +419,8 @@ struct PersonalDetailsForm: View {
         emailError = nil
         mobileNumberError = nil
         aboutError = nil
+        aadharImageError = nil
+        profileImageError = nil
     }
 }
 
