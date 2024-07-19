@@ -1,4 +1,3 @@
-
 import SwiftUI
 import FirebaseFirestore
 import UniformTypeIdentifiers
@@ -24,6 +23,18 @@ struct CourseDetailsView: View {
     let languages = ["English", "Spanish", "French", "German", "Chinese"]
     let categories = ["Swift", "UI/UX", "SwiftUI", "Web Development", "UIKit"]
     let allKeywords = ["HTML", "CSS", "JavaScript", "Python", "Java", "Swift"]
+
+    // Computed property to check if all required fields are filled
+    var isFormComplete: Bool {
+        return !courseName.isEmpty &&
+               !courseDescription.isEmpty &&
+               !courseDuration.isEmpty &&
+               courseLanguage != "Select Language" &&
+               !coursePrice.isEmpty &&
+               category != "Select Category" &&
+               selectedImage != nil &&
+               selectedKeywords != "Select Keywords"
+    }
 
     var body: some View {
         ScrollView {
@@ -56,6 +67,8 @@ struct CourseDetailsView: View {
                     }
                     showAlert = true
                 })
+                .disabled(!isFormComplete)
+                .opacity(isFormComplete ? 1.0 : 0.5)
             }
             .padding()
         }
