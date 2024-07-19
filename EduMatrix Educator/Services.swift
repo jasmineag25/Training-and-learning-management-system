@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 import SwiftUI
 
 func submitEducatorRequest(firstName : String, middleName : String, lastName : String, aadharImage: UIImage, profileImage: UIImage, email: String, mobileNumber: String , qualification: String, experience : String, subjectDomain: [String], language : [String], about : String, completion: @escaping (Bool) -> Void) {
@@ -74,6 +75,82 @@ func submitEducatorRequest(firstName : String, middleName : String, lastName : S
     }
 }
 
+func fetchMyCourses(completion: @escaping ([Course]) -> Void) {
+        let db = Firestore.firestore()
+        var courses: [Course] = []
+        let dispatchGroup = DispatchGroup()
+
+        db.collection("educators").document(email).getDocument { document, error in
+            if let error = error {
+                print("Error fetching documents: \(error)")
+                completion([])
+                return
+            }
+            if let document = document, document.exists {
+                if let enrolledCourses = document.get("courses") as? [String] {
+                    for courseId in enrolledCourses {
+                        dispatchGroup.enter()
+                        db.collection("courses").document(courseId).getDocument { snapshot, error in
+                            defer { dispatchGroup.leave() }
+                            if let error = error {
+                                print("Error fetching course document: \(error)")
+                                return
+                            }
+                            guard let docum = snapshot, let data = docum.data() else {
+                                print("No course document found")
+                                return
+                            }
+                            
+                            // Decode videos
+                            var videos = [Video]()
+                            if let videosData = data["videos"] as? [[String: Any]] {
+                                videos = videosData.compactMap { videoData in
+                                    guard let idString = videoData["id"] as? String,
+                                          let id = UUID(uuidString: idString),
+                                          let title = videoData["title"] as? String,
+                                          let urlString = videoData["videoURL"] as? String,
+                                          let url = URL(string: urlString) else {
+                                        return nil
+                                    }
+                                    return Video(id: id, title: title, videoURL: url)
+                                }
+                            }
+                            
+                            // Create the course object
+                            let course = Course(
+                                id: data["id"] as? String ?? "",
+                                educatorEmail: data["educatorEmail"] as? String ?? "",
+                                educatorName: data["educatorName"] as? String ?? "",
+                                name: data["name"] as? String ?? "",
+                                description: data["description"] as? String ?? "",
+                                duration: data["duration"] as? String ?? "",
+                                language: data["language"] as? String ?? "",
+                                price: data["price"] as? String ?? "",
+                                category: data["category"] as? String ?? "",
+                                averageRating: data["averageRating"] as? Double ?? 0.0, 
+                                keywords: data["keywords"] as? String ?? "",
+                                imageUrl: data["imageUrl"] as? String ?? "",
+                                videos: videos,
+                                notes: nil
+                            )
+                            courses.append(course)
+                        }
+                    }
+
+                    // Wait for all tasks to complete
+                    dispatchGroup.notify(queue: .main) {
+                        completion(courses)
+                    }
+                } else {
+                    print("No enrolled courses found")
+                    completion([])
+                }
+            } else {
+                print("Document does not exist")
+                completion([])
+            }
+        }
+    }
 
 func submitCourseRequest(name: String, description: String, duration: String, price: String, category: String, keywords: String, image: UIImage, language: String, email: String, educatorName : String, videos: [Video], completion: @escaping (Bool) -> Void) {
     guard let imageData = image.jpegData(compressionQuality: 0.75) else {
@@ -233,3 +310,6 @@ func fetchListOfMyCourses(completion: @escaping ([Course]) -> Void) {
         completion(courses)
     }
 }
+
+let db = Firestore.firestore()
+let email : String = (Auth.auth().currentUser?.email)!

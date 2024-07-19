@@ -340,7 +340,7 @@ struct CourseView: View {
             }
         }
         .onAppear {
-            fetchListOfCourses(){coursesList in
+            fetchMyCourses(){coursesList in
                 courses = coursesList
             }
         }
