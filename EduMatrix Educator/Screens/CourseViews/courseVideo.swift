@@ -27,18 +27,3 @@ struct courseVideo: View {
     }
         
 }
-
-//struct courseVideo_Previews: PreviewProvider {
-//    struct Wrapper: View {
-//
-//        var body: some View {
-//            NavigationView {
-//                courseVideo()
-//            }
-//        }
-//    }
-//
-//    static var previews: some View {
-//        Wrapper()
-//    }
-//}

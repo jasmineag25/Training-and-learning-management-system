@@ -134,12 +134,12 @@ struct RatingsDashboard: View {
     }
 }
 
-#Preview {
-   
-//    EducatorDashboard()
-    ContentViewHomeTab()
-    
-}
+//#Preview {
+//   
+////    EducatorDashboard()
+//    ContentViewHomeTab()
+//    
+//}
 import SwiftUI
 
 // Pie chart segment struct with Identifiable

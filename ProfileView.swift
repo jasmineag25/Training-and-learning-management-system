@@ -2,7 +2,7 @@
 //  ProfileView.swift
 //  EduMatrix Educator
 //
-//  Created by Divyanshu rai on 18/07/24.
+/* Created by Divyanshu rai on 18/07/24.
 
 
 import SwiftUI
@@ -231,58 +231,16 @@ struct FormField: View {
         }
     }
 }
-
-import SwiftUI
-/*
-struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var selectedImage: UIImage?
-    @Binding var selectedURL: URL?
-    @Binding var isPresented: Bool
-    var mediaTypes: [String]
-
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.mediaTypes = mediaTypes
-        picker.delegate = context.coordinator
-        return picker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        let parent: ImagePicker
-
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            if let uiImage = info[.originalImage] as? UIImage {
-                parent.selectedImage = uiImage
-            }
-            if let url = info[.imageURL] as? URL {
-                parent.selectedURL = url
-            }
-            parent.isPresented = false
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            parent.isPresented = false
-        }
-    }
-}
 */
+import SwiftUI
+
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
     }
 }
-/*
+
 
 import SwiftUI
 import PhotosUI
@@ -299,13 +257,13 @@ class UserProfile: ObservableObject {
     @Published var profileImage: UIImage? = UIImage(named: "ios")
 }
 
-struct ProfileViewEducator: View {
+struct ProfileView: View {
     @StateObject private var userProfile = UserProfile()
     @State private var isImagePickerPresented = false
     @State private var selectedURL: URL?
 
     var body: some View {
-        NavigationView {
+       
             ScrollView {
                 VStack(spacing: 20) {
                     // Profile Image and Name
@@ -349,13 +307,13 @@ struct ProfileViewEducator: View {
                     .padding(.horizontal)
                 }
             }
-//            .navigationTitle("Profile")
+            .navigationTitle("Profile")
             .sheet(isPresented: $isImagePickerPresented) {
                 ImagePicker(selectedImage: $userProfile.profileImage, selectedURL: $selectedURL, isPresented: $isImagePickerPresented, mediaTypes: ["public.image"])
             }
         }
     }
-}
+
 
 struct ProfileSection: View {
     var title: String
@@ -424,9 +382,10 @@ struct PersonalInformationView: View {
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                         .padding()
-                        .onChange(of: userProfile.name) { newValue in
+                        .onChange(of: userProfile.name) {
                             validateName()
                         }
+
                         .onSubmit {
                             validateName()
                         }
@@ -456,9 +415,11 @@ struct PersonalInformationView: View {
             .sheet(isPresented: $isImagePickerPresented) {
                 ImagePicker(selectedImage: $userProfile.profileImage, selectedURL: $selectedURL, isPresented: $isImagePickerPresented, mediaTypes: ["public.image"])
             }
-        }
+        }.navigationBarItems(trailing: Button("Edit") {
+            // Edit action
+            })
     }
-    
+        
     private func validateName() {
         if userProfile.name.isEmpty {
             nameError = "Name cannot be empty"
@@ -497,7 +458,7 @@ struct FormField: View {
         }
     }
 }
-*/
+
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
     @Binding var selectedURL: URL?
@@ -539,10 +500,10 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
-//
+
 //struct ProfileView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ProfileViewEducator()
+//        ProfileView()
 //    }
 //}
 //

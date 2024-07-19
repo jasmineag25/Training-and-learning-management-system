@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
+
 struct HomeView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     var body: some View {
@@ -84,6 +85,6 @@ struct HomeView: View {
        }
 }
 
-#Preview {
-    HomeView()
-}
+//#Preview {
+//    ContentViewHomeTab()
+//}

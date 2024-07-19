@@ -126,7 +126,7 @@ func submitCourseRequest(name: String, description: String, duration: String, pr
             }
             
             dispatchGroup.notify(queue: .main) {
-                let courseData = Course(id: courseID, educatorEmail: email, educatorName: educatorName, name: name, description: description, duration: duration, language: language, price: price, category: category, keywords: keywords, imageUrl: imageURL, videos: newVideos)
+                let courseData = Course(id: courseID, educatorEmail: email, educatorName: educatorName, name: name, description: description, duration: duration, language: language, price: price, category: category, keywords: keywords, imageUrl: imageURL, videos: newVideos, notes: nil)
                 let db = Firestore.firestore()
                 
                 db.collection("coursesRequests").document(courseData.id).setData(courseData.toDictionary()) { err in
@@ -141,5 +141,95 @@ func submitCourseRequest(name: String, description: String, duration: String, pr
                 }
             }
         }
+    }
+}
+
+func fetchListOfCourses(completion: @escaping ([Course]) -> Void) {
+    var courses : [Course] = []
+    let db = Firestore.firestore()
+    db.collection("courses").getDocuments { snapshot, error in
+        if let error = error {
+            print("Error fetching documents: \(error)")
+            return
+        }
+        guard let documents = snapshot?.documents else {
+            print("No documents")
+            return
+        }
+        courses = documents.compactMap { doc in
+            let data = doc.data()
+            
+            // Decode videos
+            var videos = [Video]()
+            if let videosData = data["videos"] as? [[String: Any]] {
+                videos = videosData.compactMap { videoData in
+                    return Video(id: UUID(uuidString: videoData["id"] as! String)!, title: videoData["title"] as? String ?? "", videoURL: URL(string: videoData["videoURL"] as? String ?? "")!)
+                }
+            }
+            
+            // Create the course object
+            return Course(
+                id: data["id"] as? String ?? "",
+                educatorEmail: data["educatorEmail"] as? String ?? "",
+                educatorName: data["educatorName"] as? String ?? "",
+                name: data["name"] as? String ?? "",
+                description: data["description"] as? String ?? "",
+                duration: data["duration"] as? String ?? "",
+                language: data["language"] as? String ?? "",
+                price: data["price"] as? String ?? "",
+                category: data["category"] as? String ?? "",
+                averageRating: data["averageRating"] as? Double ?? 0.0,
+                keywords: data["keywords"] as? String ?? "",
+                imageUrl: data["imageUrl"] as? String ?? "",
+                videos: videos,
+                notes: nil
+            )
+        }
+        completion(courses)
+    }
+}
+
+func fetchListOfMyCourses(completion: @escaping ([Course]) -> Void) {
+    var courses : [Course] = []
+    let db = Firestore.firestore()
+    db.collection("courses").getDocuments { snapshot, error in
+        if let error = error {
+            print("Error fetching documents: \(error)")
+            return
+        }
+        guard let documents = snapshot?.documents else {
+            print("No documents")
+            return
+        }
+        courses = documents.compactMap { doc in
+            let data = doc.data()
+            
+            // Decode videos
+            var videos = [Video]()
+            if let videosData = data["videos"] as? [[String: Any]] {
+                videos = videosData.compactMap { videoData in
+                    return Video(id: UUID(uuidString: videoData["id"] as! String)!, title: videoData["title"] as? String ?? "", videoURL: URL(string: videoData["videoURL"] as? String ?? "")!)
+                }
+            }
+            
+            // Create the course object
+            return Course(
+                id: data["id"] as? String ?? "",
+                educatorEmail: data["educatorEmail"] as? String ?? "",
+                educatorName: data["educatorName"] as? String ?? "",
+                name: data["name"] as? String ?? "",
+                description: data["description"] as? String ?? "",
+                duration: data["duration"] as? String ?? "",
+                language: data["language"] as? String ?? "",
+                price: data["price"] as? String ?? "",
+                category: data["category"] as? String ?? "",
+                averageRating: data["averageRating"] as? Double ?? 0.0,
+                keywords: data["keywords"] as? String ?? "",
+                imageUrl: data["imageUrl"] as? String ?? "",
+                videos: videos,
+                notes: nil
+            )
+        }
+        completion(courses)
     }
 }

@@ -64,147 +64,147 @@ struct LoginView: View {
 
                     // Password field with dropdown suggestion
                     VStack(alignment: .leading) {
-                        HStack {
-                            if isPasswordVisible {
-                                TextField("Password", text: $password)
-                                    .onChange(of: password) { _ in
-                                        isPasswordFocused = true
-                                        isPopoverVisible = true
-                                    }
-                                    .overlay(
-                                        GeometryReader { geometry in
-                                            VStack {
-                                                if showPasswordDropdown {
-                                                    Spacer(minLength: 50)
-                                                    Button(action: {
-                                                        password = generateRandomPassword()
-                                                        showPasswordDropdown = false
-                                                    }) {
-                                                        Text("Suggested Password: \(generateRandomPassword())")
-                                                            .padding()
-                                                            .background(Color(.secondarySystemBackground))
-                                                            .cornerRadius(5.0)
-                                                    }
-                                                    .padding(.top, 5)
-                                                    .transition(.move(edge: .bottom))
-                                                    .animation(.easeInOut)
-                                                }
-                                            }
-                                            .frame(width: geometry.size.width, alignment: .leading)
-                                        }
-                                    )
-                            } else {
-                                SecureField("Password", text: $password)
-                                    .onChange(of: password) { _ in
-                                        isPasswordFocused = true
-                                        isPopoverVisible = true
-                                    }
-                                    .overlay(
-                                        GeometryReader { geometry in
-                                            VStack {
-                                                if showPasswordDropdown {
-                                                    Spacer(minLength: 50)
-                                                    Button(action: {
-                                                        password = generateRandomPassword()
-                                                        showPasswordDropdown = false
-                                                    }) {
-                                                        Text("Suggested Password: \(generateRandomPassword())")
-                                                            .padding()
-                                                            .background(Color(.secondarySystemBackground))
-                                                            .cornerRadius(5.0)
-                                                    }
-                                                    .padding(.top, 5)
-                                                    .transition(.move(edge: .bottom))
-                                                    .animation(.easeInOut)
-                                                }
-                                            }
-                                            .frame(width: geometry.size.width, alignment: .leading)
-                                        }
-                                    )
-                            }
-                            Button(action: {
-                                isPasswordVisible.toggle()
-                            }) {
-                                Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
-                                    .foregroundColor(.gray)
+    HStack {
+        if isPasswordVisible {
+            TextField("Password", text: $password)
+                .onChange(of: password) { _ in
+                    isPasswordFocused = true
+                    isPopoverVisible = true
+                }
+                .overlay(
+                    GeometryReader { geometry in
+                        VStack {
+                            if showPasswordDropdown {
+                                Spacer(minLength: 50)
+                                Button(action: {
+                                    password = generateRandomPassword()
+                                    showPasswordDropdown = false
+                                }) {
+                                    Text("Suggested Password: \(generateRandomPassword())")
+                                        .padding()
+                                        .background(Color(.secondarySystemBackground))
+                                        .cornerRadius(5.0)
+                                }
+                                .padding(.top, 5)
+                                .transition(.move(edge: .bottom))
+                                .animation(.easeInOut)
                             }
                         }
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(5.0)
-                        .padding(.top, 10)
-                        .onTapGesture {
-                            showPasswordDropdown = true
-                        }
+                        .frame(width: geometry.size.width, alignment: .leading)
                     }
-
-                    // Forgot password
-                    HStack {
-                        Spacer()
-                        NavigationLink(destination: ForgotPasswordView()) {
-                            Text("Forgot password?")
-                                .font(.body)
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    .padding(.top, 5)
-
-                    // Login button
-                    Button(action: {
-//                        if validateCredentials(email: email, password: password) {
-                            checkLoginCredentials(email: email, password: password)
-                        //}
-                    }) {
-                        Text("Log in")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(width: 220, height: 50)
-                            .background(Color.blue)
-                            .cornerRadius(10.0)
-                            .padding(.top, 20)
-                    }
-                    Spacer(minLength: 50)
-
-                    // Sign up link
-                    
-                    NavigationLink(destination: PersonalDetailsForm()) {
-                        Text("Become an Educator?")
-                            .font(.body)
-                            .foregroundColor(.blue)
-                    }
-                    .padding(.top, 20)
+                )
+        } else {
+            SecureField("Password", text: $password)
+                .onChange(of: password) { _ in
+                    isPasswordFocused = true
+                    isPopoverVisible = true
                 }
-                .padding(.horizontal, 30)
-                .navigationBarHidden(true)
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text("Invalid Input"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-                }
-                .onTapGesture {
-                    isPopoverVisible = false // Hide popover when tapped outside
-                    showPasswordDropdown = false // Hide password dropdown when tapped outside
-                }
+.overlay(
+GeometryReader { geometry in
+    VStack {
+        if showPasswordDropdown {
+            Spacer(minLength: 50)
+            Button(action: {
+                password = generateRandomPassword()
+                showPasswordDropdown = false
+            }) {
+                Text("Suggested Password: \(generateRandomPassword())")
+                    .padding()
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(5.0)
             }
-            .overlay(
-                Group {
-                    if isPasswordFocused && !password.isEmpty && isPopoverVisible {
-                        PasswordCriteriaPopover(password: $password)
-                            .padding(.trailing, 140)
-                            .padding(.leading, 20)
-                            .padding(.top, 12)
-                            .transition(.move(edge: .bottom))
-                            .zIndex(1) // Ensure popover is above other views
-                            .background(
-                                Color.black.opacity(0.001)
-                                    .onTapGesture {
-                                        isPopoverVisible = false
-                                    }
-                            )
-                            .offset(y: 200) // Adjust the offset to position the popover below the password field
-                    }
-                }
-            )
+            .padding(.top, 5)
+            .transition(.move(edge: .bottom))
+            .animation(.easeInOut)
         }
+    }
+    .frame(width: geometry.size.width, alignment: .leading)
+}
+)
+        }
+        Button(action: {
+            isPasswordVisible.toggle()
+        }) {
+            Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
+                .foregroundColor(.gray)
+        }
+    }
+    .padding()
+    .background(Color(.secondarySystemBackground))
+    .cornerRadius(5.0)
+    .padding(.top, 10)
+    .onTapGesture {
+        showPasswordDropdown = true
+    }
+}
+
+// Forgot password
+HStack {
+    Spacer()
+    NavigationLink(destination: ForgotPasswordView()) {
+        Text("Forgot password?")
+            .font(.body)
+            .foregroundColor(.blue)
+    }
+}
+.padding(.top, 5)
+
+// Login button
+Button(action: {
+//                        if validateCredentials(email: email, password: password) {
+        checkLoginCredentials(email: email, password: password)
+    //}
+}) {
+    Text("Log in")
+        .font(.headline)
+        .foregroundColor(.white)
+        .padding()
+        .frame(width: 220, height: 50)
+        .background(Color.blue)
+        .cornerRadius(10.0)
+        .padding(.top, 20)
+}
+Spacer(minLength: 50)
+
+// Sign up link
+
+NavigationLink(destination: PersonalDetailsForm()) {
+    Text("Become an Educator?")
+        .font(.body)
+        .foregroundColor(.blue)
+}
+.padding(.top, 20)
+}
+.padding(.horizontal, 30)
+.navigationBarHidden(true)
+.alert(isPresented: $showAlert) {
+Alert(title: Text("Invalid Input"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+}
+.onTapGesture {
+isPopoverVisible = false // Hide popover when tapped outside
+showPasswordDropdown = false // Hide password dropdown when tapped outside
+}
+}
+.overlay(
+Group {
+if isPasswordFocused && !password.isEmpty && isPopoverVisible {
+    PasswordCriteriaPopover(password: $password)
+        .padding(.trailing, 140)
+        .padding(.leading, 20)
+        .padding(.top, 12)
+        .transition(.move(edge: .bottom))
+        .zIndex(1) // Ensure popover is above other views
+        .background(
+            Color.black.opacity(0.001)
+                .onTapGesture {
+                    isPopoverVisible = false
+                }
+        )
+        .offset(y: 200) // Adjust the offset to position the popover below the password field
+}
+}
+)
+}
     
 
     private func validateCredentials(email: String, password: String) -> Bool {

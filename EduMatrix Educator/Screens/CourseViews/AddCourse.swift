@@ -62,13 +62,14 @@ struct CourseDetailsView: View {
         .background(Color("F2F2F7"))
         .navigationTitle("Course Details")
         .sheet(isPresented: $isShowingImagePicker) {
-            ImagePicker(selectedURL: $selectedURL, isPresented: $isShowingImagePicker, mediaTypes: ["public.image"])
+            ImagePicker(selectedImage: $selectedImage, selectedURL: $selectedURL, isPresented: $isShowingImagePicker, mediaTypes: ["public.image"])
                 .onDisappear {
                     if let selectedURL = selectedURL, let image = UIImage(contentsOfFile: selectedURL.path) {
                         self.selectedImage = image
                     }
                 }
         }
+
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Course Submitted"),

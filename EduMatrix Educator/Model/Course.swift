@@ -1,11 +1,12 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import UIKit
+import SwiftUI
 
-
-struct Course: Identifiable {
+struct Course: Identifiable , Codable{ // Ensure Course conforms to Identifiable
     var id: String
-    var educatorEmail: String
+    var educatorEmail : String
     var educatorName: String
     var name: String
     var description: String
@@ -13,6 +14,7 @@ struct Course: Identifiable {
     var language: String
     var price: String
     var category: String
+    var averageRating: Double = 0.0
     var keywords: String
     var imageUrl: String
     var videos: [Video]
@@ -21,7 +23,7 @@ struct Course: Identifiable {
     func toDictionary() -> [String: Any] {
         return [
             "id": id,
-            "educatorEmail": educatorEmail,
+            "email": educatorEmail,
             "educatorName" : educatorName,
             "name": name,
             "description": description,
@@ -29,6 +31,7 @@ struct Course: Identifiable {
             "language": language,
             "price": price,
             "category": category,
+            "averageRating" : averageRating,
             "keywords": keywords,
             "imageUrl": imageUrl,
             "videos": videos.map { $0.toDictionary() },
@@ -36,8 +39,7 @@ struct Course: Identifiable {
         ]
     }
 }
-
-struct Video: Identifiable {
+struct Video: Identifiable ,Codable{
     var id: UUID
     var title: String
     var videoURL: URL
@@ -51,7 +53,7 @@ struct Video: Identifiable {
     }
 }
 
-struct Note: Identifiable {
+struct Note: Identifiable , Codable {
     var id: UUID
     var title: String
     var url: URL
@@ -64,3 +66,36 @@ struct Note: Identifiable {
         ]
     }
 }
+//struct Course: Identifiable {
+//    let id = UUID()
+//    let name: String
+//    let description: String
+//    let keywords: [String]
+//    let price: String
+//    let ratings: Double
+//    
+//    let duration: Double
+//    let imageUrl: Image
+//    let videos: [Video]
+//    let notes: [Note]
+//    let assignments: [Assignment]
+//}
+struct eduactorTotalData{
+    var totalEnrollemnts:Int=320
+    var totalCousrses:Int
+    
+}
+
+
+struct Module: Identifiable {
+    let id = UUID()
+    let title: String
+    let videoName: URL?
+}
+
+struct Assignment: Identifiable {
+    let id = UUID()
+    let title: String
+    let pdfName:URL?
+}
+

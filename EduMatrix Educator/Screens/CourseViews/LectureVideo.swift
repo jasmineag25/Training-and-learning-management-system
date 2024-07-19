@@ -22,8 +22,3 @@ struct LectureVideo: View {
         
     }
 }
-
-//#Preview {
-//    
-//    LectureVideo(videoTitle: <#Binding<String>#>)
-//}

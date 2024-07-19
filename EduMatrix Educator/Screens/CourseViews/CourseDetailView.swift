@@ -11,15 +11,23 @@ import AVKit
 import PDFKit
 
 struct CourseDetailView: View {
-    var course: CourseHomeTab
+    var course: Course
 
     var body: some View {
 ScrollView {
 VStack(alignment: .leading) {
-course.image
-    .resizable()
-    .aspectRatio(contentMode: .fill)
-    .frame(height: 200)
+    if let url = URL(string: course.imageUrl) {
+        AsyncImage(url: url) { image in
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 200)
+                .clipped()
+        } placeholder: {
+            Color.gray
+                .frame(height: 200)
+        }
+    }
 
 VStack(alignment: .leading, spacing: 10) {
     Text(course.name)
@@ -28,29 +36,29 @@ VStack(alignment: .leading, spacing: 10) {
         .fontWeight(.bold)
 
     HStack(spacing: 4) {
-        ForEach(0..<Int(course.ratings), id: \.self)  { _ in
+        ForEach(0..<Int(course.averageRating), id: \.self)  { _ in
             Image(systemName: "star.fill")
                 .foregroundColor(.yellow)
         }
-        if course.ratings < 5 {
-            ForEach(0..<Int(course.ratings), id: \.self)  { _ in
+        if course.averageRating < 5 {
+            ForEach(0..<Int(course.averageRating), id: \.self)  { _ in
                 Image(systemName: "star")
                     .foregroundColor(.gray)
             }
         }
-        Text("\(course.ratings, specifier: "%.1f")/5.0")
+        Text("\(course.averageRating, specifier: "%.1f")/5.0")
     }
 
     HStack {
         Image(systemName: "clock")
-        Text("\(course.duration, specifier: "%.1f") hours")
+        Text("\(course.duration) hours")
         Spacer()
         Text("Rs \(course.price)")
     }
 
     HStack {
         Image(systemName: "doc.text")
-        Text("\(course.modules.count) lessons")
+        Text("\(course.videos.count) lessons")
     }
 Spacer()
     Text("Course Description:")
@@ -58,7 +66,7 @@ Spacer()
 
     Text(course.description)
   
-        NavigationLink(destination: ModulesView(modules: course.modules)) {
+        NavigationLink(destination: ModulesView(modules: course.videos)) {
             HStack {
                 Text("Modules") .foregroundColor(.black)
                     .font(.title3).bold()
@@ -70,29 +78,29 @@ Spacer()
         }
         .padding(.vertical)
 
-        NavigationLink(destination: NotesView(notes: course.notes)) {
-            HStack {
-                Text("Notes") .foregroundColor(.black)
-                    .font(.title3).bold()
-                    
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
-            }
-        }
+//    NavigationLink(destination: NotesView(notes: course.notes!)) {
+//            HStack {
+//                Text("Notes") .foregroundColor(.black)
+//                    .font(.title3).bold()
+//                    
+//                Spacer()
+//                Image(systemName: "chevron.right")
+//                    .foregroundColor(.gray)
+//            }
+//        }
 //                        .padding(.vertical)
 
-        NavigationLink(destination: AssignmentsView(assignments: course.assignments)) {
-            HStack {
-                Text("Assignments")
-                    .foregroundColor(.black)
-                    .font(.title3).bold()
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
-            }
-        }
-        .padding(.vertical)
+//        NavigationLink(destination: AssignmentsView(assignments: course.assignments)) {
+//            HStack {
+//                Text("Assignments")
+//                    .foregroundColor(.black)
+//                    .font(.title3).bold()
+//                Spacer()
+//                Image(systemName: "chevron.right")
+//                    .foregroundColor(.gray)
+//            }
+//        }
+//        .padding(.vertical)
                 }
 
             }
@@ -106,26 +114,26 @@ Spacer()
     }
 }
 
-struct CourseDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        CourseDetailView(course: CourseHomeTab(
-            name: "Sample Course",
-            description: "This is a sample course.",
-            keywords: ["Swift", "iOS"],
-            price: "5000",
-            ratings: 4.5,
-            duration: 12.0, // Assuming duration is a Double
-            image: Image("ios"), // Assuming image is an Image
-//            modules: [Module(id: UUID(), videoName:  URL(string: "sample1_video_url")!), title: "Sample Module", )],
-            modules: [Module(title:"Sample Module", videoName: URL(string: "sample1")!),
-                      Module(title:"Sample Module", videoName: URL(string: "sample1")!)],
-            notes: [Note(id:UUID(),title: "Sample Note", url: URL(string: "pdf1")!)],
-            assignments: [Assignment( title: "Sample Assignment", pdfName: URL(string: "https://example.com/pdf2"))]
-        ))
-    }
-}
-
-
+//struct CourseDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CourseDetailView(course: CourseHomeTab(
+//            name: "Sample Course",
+//            description: "This is a sample course.",
+//            keywords: ["Swift", "iOS"],
+//            price: "5000",
+//            ratings: 4.5,
+//            duration: 12.0, // Assuming duration is a Double
+//            imageUrl: Image("ios"), // Assuming image is an Image
+////            modules: [Module(id: UUID(), videoName:  URL(string: "sample1_video_url")!), title: "Sample Module", )],
+//            videos: [Video(title:"Sample Module", videoName: URL(string: "sample1")!),
+//                      Video(title:"Sample Module", videoName: URL(string: "sample1")!)],
+//            notes: [Note(id:UUID(),title: "Sample Note", url: URL(string: "pdf1")!)],
+//            assignments: [Assignment( title: "Sample Assignment", pdfName: URL(string: "https://example.com/pdf2"))]
+//        ))
+//    }
+//}
+//
+//
 
 struct PDFViewerView: View {
     let url: URL?
@@ -168,11 +176,11 @@ struct VideoPlayerView: View {
     }
 }
 struct ModulesView: View {
-    var modules: [Module]
+    var modules: [Video]
 
     var body: some View {
         List(modules) { module in
-            NavigationLink(destination: VideoPlayerView(url: module.videoName)) {
+            NavigationLink(destination: VideoPlayerView(url: module.videoURL)) {
                 HStack {
                     Text(module.title)
                     Spacer()
